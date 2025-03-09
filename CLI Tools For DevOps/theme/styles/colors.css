@@ -1,0 +1,124 @@
+/* default theme colors */
+/* can be overriden by using the `themeConfig` option */
+html.dark {
+  /* Base16 colors */
+  --slidev-theme-color: #FFFCFF;
+  --slidev-theme-primary: #FFFCFF;
+  --slidev-theme-foreground: #FFFCFF;
+  --slidev-theme-background: #212021;
+  --slidev-theme-gray100: #000000;
+  --slidev-theme-gray90: #1A1A1A;
+  --slidev-theme-gray80: #333333;
+  --slidev-theme-gray70: #4D4D4D;
+  --slidev-theme-gray60: #666666;
+  --slidev-theme-gray50: #7F7F7F;
+  --slidev-theme-gray40: #999999;
+  --slidev-theme-gray30: #B3B3B3;
+  --slidev-theme-gray20: #CCCCCC;
+  --slidev-theme-gray10: #E5E5E5;
+  --slidev-theme-gray0: #FFFFFF;
+
+  --slidev-theme-red: #D92D20;
+  --slidev-theme-cyan: #55C4CF;
+  --slidev-theme-black: #212021;
+  --slidev-theme-brightBlue: #6ECEFF;
+  --slidev-theme-brightPurple: #D29BC6;
+  --slidev-theme-yellow: #FBED02;
+  --slidev-theme-green: #01A252;
+  --slidev-theme-brightRed: #FF6E6D;
+  --slidev-theme-white: #FFFCFF;
+  --slidev-theme-brightWhite: #FFFCFF;
+  --slidev-theme-blue: #01A0E4;
+  --slidev-theme-purple: #A16A94;
+  --slidev-theme-brightGreen: #6CD18E;
+  --slidev-theme-brightYellow: #FFFF85;
+  --slidev-theme-brightCyan: #95F2FF;
+  --slidev-theme-brightBlack: #493F3F;
+  --slidev-theme-brightGray: #A5A2A2;
+  --slidev-theme-darkWhite: #A5A2A2;
+  --slidev-theme-gray: #493F3F;
+  --slidev-theme-darkGray: #493F3F;
+}
+
+html:not(.dark) {
+  /* Base16 colors */
+  --slidev-theme-color: #000000;
+  --slidev-theme-primary: #000000;
+  --slidev-theme-foreground: #000000;
+  --slidev-theme-background: #FFFFFF;
+
+  --slidev-theme-gray0: #000000;
+  --slidev-theme-gray10: #1A1A1A;
+  --slidev-theme-gray20: #333333;
+  --slidev-theme-gray30: #4D4D4D;
+  --slidev-theme-gray40: #666666;
+  --slidev-theme-gray50: #7F7F7F;
+  --slidev-theme-gray60: #999999;
+  --slidev-theme-gray70: #B3B3B3;
+  --slidev-theme-gray80: #CCCCCC;
+  --slidev-theme-gray90: #E5E5E5;
+  --slidev-theme-gray100: #FFFFFF;
+
+  --slidev-theme-red: #BE0000;
+  --slidev-theme-black: #000000;
+  --slidev-theme-brightBlue: #12A8CD;
+  --slidev-theme-brightPurple: #C05478;
+  --slidev-theme-yellow: #BB6200;
+  --slidev-theme-green: #4A8100;
+  --slidev-theme-cyan: #008E81;
+  --slidev-theme-brightRed: #CA7073;
+  --slidev-theme-brightWhite: #FFFFFF;
+  --slidev-theme-white: #FFFFFF;
+  --slidev-theme-blue: #0073C3;
+  --slidev-theme-purple: #8F0057;
+  --slidev-theme-brightGreen: #81B600;
+  --slidev-theme-brightYellow: #CC9800;
+  --slidev-theme-brightCyan: #2BC2A7;
+  --slidev-theme-brightBlack: #454545;
+  --slidev-theme-brightGray: #848388;
+  --slidev-theme-darkWhite: #848388;
+  --slidev-theme-gray: #454545;
+  --slidev-theme-darkGray: #454545;
+}
+
+:root {
+
+  /* Code colors */
+  --slidev-theme-code-background: var(--slidev-theme-background);
+  --slidev-theme-code-border: var(--slidev-theme-darkGray);
+
+  /* Header shadow */
+  --slidev-theme-header-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+  /*  Default */
+  --slidev-theme-default-headingBg: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
+  --slidev-theme-default-headingColor: var(--slidev-theme-background);
+  --slidev-theme-default-background: var(--slidev-theme-background);
+
+  /*  Default */
+  --slidev-theme-image-headingBg: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
+  --slidev-theme-image-headingColor: var(--slidev-theme-background);
+  --slidev-theme-image-background: var(--slidev-theme-background);
+
+  /*  Center */
+  --slidev-theme-center-headingBg: var(--slidev-theme-brightBlue);
+  --slidev-theme-center-headingColor: var(--slidev-theme-background);
+  --slidev-theme-center-background: var(--slidev-theme-background);
+
+  /*  Cover */
+  --slidev-theme-cover-headingBg: var(--slidev-theme-brightCyan);
+  --slidev-theme-cover-headingColor: var(--slidev-theme-background);
+  --slidev-theme-cover-background: var(--slidev-theme-background);
+
+  /*  Section */
+  --slidev-theme-section-headingBg: var(--slidev-theme-brightBlue);
+  --slidev-theme-section-headingColor: var(--slidev-theme-background);
+  --slidev-theme-section-background: var(--slidev-theme-background);
+
+  /*  About me */
+  --slidev-theme-aboutme-background: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
+  --slidev-theme-aboutme-color: var(--slidev-theme-background);
+  --slidev-theme-aboutme-helloBg: var(--slidev-theme-brightYellow);
+  --slidev-theme-aboutme-helloColor: var(--slidev-theme-background);
+  --slidev-theme-aboutme-nameColor: var(--slidev-theme-brightRed);
+}

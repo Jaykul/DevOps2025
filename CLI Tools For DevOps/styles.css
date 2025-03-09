@@ -1,0 +1,102 @@
+.text-blend {
+  background-color: #1b587c;
+  background-image: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.bg-blend {
+  background-color: #1b587c;
+  background-image: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
+  background-size: 100%;
+  padding: 0 1em;
+  border-radius: 1em;
+}
+
+
+/*
+:root {
+  --slidev-theme-background: var(--slidev-theme-gray70) !important;
+}
+.rightHeader {
+  display: inline-block;
+  margin-left: -0.05em;
+  width: fit-content;
+  position: relative;
+  margin-bottom: 0;
+  padding: 0.25em;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    background: var(--slidev-theme-section-headingBg);
+    box-shadow: var(--slidev-theme-header-shadow);
+    content: " ";
+    display: block;
+    position: absolute;
+    width: calc(100%);
+    height: calc(100%);
+    margin-left: -0.25em;
+    margin-top: -0.25em;
+    z-index: -1;
+    transform: rotate(-1deg);
+  }
+}
+*/
+/*
+.slidev-layout .grid-auto-flow-col .outside {
+  position: absolute;
+  margin-top: -1.5em;
+}
+*/
+
+/* padding-top: 4em;
+.slidev-layout .grid-auto-flow-col {
+  column-gap: 2em;
+}
+*/
+.slidev-layout.columns.grid-rows-2 .content {
+  @apply grid-rows-2
+}
+.slidev-layout.columns.grid-rows-3 .content {
+  @apply grid-rows-3
+}
+.slidev-layout.columns.grid-rows-4 .content {
+  @apply grid-rows-4
+}
+.slidev-layout.columns.grid-rows-5 .content {
+  @apply grid-rows-5
+}
+
+
+.slidev-layout.columns .content {
+  @apply grid grid-auto-flow-col gap-1em;
+  /* grid-template-rows: 3.5em repeat(4, minmax(1em, 1fr)); */
+
+  div {
+    * {
+        @apply: my-0;
+      }
+  }
+
+}
+
+.slidev-layout.columns p {
+  font-size: 1vi;
+}
+
+.slidev-layout.columns h1.blocking {
+  &::after {
+    @apply col-span-3;
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 90vw;
+    height: 100%;
+    margin-left: -5em;
+    margin-top: -1.25em;
+    border: 1px solid salmon;
+  }
+}

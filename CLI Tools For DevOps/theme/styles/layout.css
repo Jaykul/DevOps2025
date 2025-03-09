@@ -1,0 +1,29 @@
+/* I don't think I need these "unnamed" styles
+.dark #slide-content,
+.dark .bg-main,
+.slidev-layout {
+  background: var(--slidev-theme-background);
+  color: var(--slidev-theme-color);
+}
+*/
+
+/*  General layout styles */
+.slidev-layout {
+  background: var(--slidev-theme-background);
+  color: var(--slidev-theme-color);
+
+  h2 {
+    @apply mt-6;
+  }
+
+  h3 {
+    @apply mt-4;
+  }
+}
+
+.content.more {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 3.5rem;
+}
