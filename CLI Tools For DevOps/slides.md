@@ -92,29 +92,31 @@ I'm Joel Bennett, and I'm from upstate New York by way of the grasslands of Guan
 
 ---
 
-# A is for age<br/><div class="text-sm text-primary-lighter" style="font-weight:200;" >https://github.com/FiloSottile/age</div>
+# A is for age<div class="text-sm text-primary-lighter">https://github.com/FiloSottile/age</div>
 
-A simple, modern and secure encryption tool with small keys, no config options, and pipeline composability. (See also [rage](https://github.com/str4d/rage) and [typage](https://github.com/FiloSottile/typage))
+A simple, modern and secure encryption tool with small keys, no config options, and pipeline composability. (See also [rage](https://github.com/str4d/rage) and [typage](https://github.com/FiloSottile/typage)).
 
-```powershell
-choco install age.portable
-```
+### Tips
 
+Age also supports using SSH Keys for encryption.
+
+<!--
 ### Usage
 
 ```powershell
 age [--encrypt] [-p | -r key | -R keyfile] [-o file] ...
 age --decrypt [-i keyfile] [-o file] ...
 ```
+-->
 
 ### Example
 
 ```powershell
-    age-keygen -o key.txt
-    Public key: age1ql3z7hjy54pw3hyww5ayyfg7zqgvc7w3j2elw8zmrj2kg5sfn9aqmcac8p
+age-keygen -o key.txt
+Public key: age1ql3z7hjy54pw3hyww5ayyfg7zqgvc7w3j2elw8zmrj2kg5sfn9aqmcac8p
 
-    tar cvz "~/data" | age -r "age1ql3z7hjy54pw3hyww5ayyfg7zqgvc7w3j2elw8zmrj2kg5sfn9aqmcac8p" > data.tar.gz.age
-    age --decrypt --identity "key.txt" --output "data.tar.gz" data.tar.gz.age
+tar cvz "~/data" | age -r "age1ql3z7hjy54pw3hyww5ayyfg7zqgvc7w3j2elw8zmrj2kg5sfn9aqmcac8p" > data.tar.gz.age
+age --decrypt --identity "key.txt" --output "data.tar.gz" data.tar.gz.age
 ```
 
 <!--
@@ -125,7 +127,7 @@ Honorable mention to [az](https://github.com/Azure/azure-cli), which is basicall
 
 ---
 
-# B is for bat<br/><div class="text-sm text-primary-lighter" style="font-weight:200;" >https://github.com/sharkdp/bat</div>
+# B is for bat<div class="text-sm text-primary-lighter">https://github.com/sharkdp/bat</div>
 
 A `cat` clone with syntax highlighting and git integration. It shows modifications with respect to the git index, can syntax highlight anything from actionscript to zig (including powershell), can show non-printable characters, can display multiple files at once, read pipeline input, pages by default, etc.
 
@@ -137,11 +139,15 @@ Next time someone asks you to `irm ... | iex`, check it with `bat` first:
 irm bun.sh/install.ps1 | bat -l ps1
 ```
 <!--
-Honorable mention to [bun](https://bun.sh/), which is a fast, all-in-one JavaScript runtime (like node + npm but faster).
+
+Honorable mentions:
+- [broot](https://github.com/Canop/broot), a better `tree` or `fd`
+- [bun](https://bun.sh/) a fast, all-in-one JavaScript runtime (like node + npm but faster).
+
 -->
 ---
 
-# C is for chezmoi<br/><div class="text-sm text-primary-lighter" style="font-weight:200;" >https://github.com/twpayne/chezmoi</div>
+# C is for chezmoi<div class="text-sm text-primary-lighter">https://github.com/twpayne/chezmoi</div>
 
 Chezmoi manages personal configuration files ("dotfiles" like `~/.gitconfig`) and profile scripts across machines. I even use it to manage my WezTerm and Windows Terminal config, and some VSCode settings.
 
@@ -171,7 +177,7 @@ Honorary mention to [choco](https://chocolatey.org/), which is the easiest way t
 <!-- TODO: can we make `code` work? -->
 The open source `curl` command-line tool is so universal, it's even included in Windows! It's **not** just for HTTP, it supports over two dozen other protocols including FTP, GOPHER, IMAP, POP3, SMTP and MQTT, etc.
 
-## Tips:
+### Tips
 
 1. You can put default options in `~/.curlrc` and sync them with chezmoi 😉
 2. Try [Curl by Example](https://antonz.org/curl-by-example/).
@@ -181,17 +187,19 @@ The open source `curl` command-line tool is so universal, it's even included in 
 ```powershell
 # To make curl fail when it gets a 4xx or 5xx code
 curl --fail http://httpbingo.org/status/503
-
 # To POST json
-curl --json ($pwd|select *Path| convertto-json) http://httpbingo.org/post
+curl --json ($pwd|select *Path| ConvertTo-Json) http://httpbingo.org/post
+# Get someones public SSH keys so you can encrypt a message to them
+curl -s https://github.com/jaykul.keys | age -a -R - .\demos\password.txt
 ```
+
 <!--
 The man page for curl is over 80 pages (printed), but it's worth learning the basics, because this really is one of the most universally available networking tools. I don't want to spend any time on this, but I didn't feel I could skip it.
 -->
 
 ---
 
-# D is for dotnet new<br/><div class="text-sm text-primary-lighter" style="font-weight:200;" >https://github.com/dotnet/templating</div>
+# D is for dotnet new<div class="text-sm text-primary-lighter">https://github.com/dotnet/templating</div>
 
 By far the easiest way to create templates for projects.
 
@@ -217,12 +225,12 @@ We use dotnet new to generate templates for PowerShell modules, gitops configura
 
 TODO: I need to publish that PowerShell Template
 
-Honorable mention to doggo, which is one of the nicest DNS tools, and to delta which is an amazing diff tool.
+Honorable mention to delta which is an amazing diff tool, and doggo, which is one of the nicest DNS tools...
 -->
 
 ---
 
-# E is for earthly<br/><div class="text-sm text-primary-lighter" style="font-weight:200;" >https://github.com/earthly/earthly</div>
+# E is for earthly<div class="text-sm text-primary-lighter">https://github.com/earthly/earthly</div>
 
 Earthfile is like a cross between make files and dockerfiles. It can build anything, and the builds are fast, cached, and consistent, running the same whether on a developer laptop or GitHub CI/CD.
 
@@ -249,7 +257,7 @@ TODO: This would be a great live demo
 
 ---
 
-# F is for fzf<br/><div class="text-sm text-primary-lighter" style="font-weight:200;" >https://github.com/junegunn/fzf</div>
+# F is for fzf<div class="text-sm text-primary-lighter">https://github.com/junegunn/fzf</div>
 
 Think of fzf as a faster, more powerful, text-only version of `Out-ConsoleGridView`...
 
@@ -266,7 +274,7 @@ Honorable mention to fd, which is a faster find, and fluxCD which we use to mana
 
 ---
 
-# G is for Git<br/><div class="text-sm text-primary-lighter" style="font-weight:200;" >https://git-scm.com/</div>
+# G is for Git<div class="text-sm text-primary-lighter">https://git-scm.com/</div>
 
 This one is another no-brainer that I really can't ignore. If you're not tracking your change history in git, what are you using?
 
@@ -278,8 +286,360 @@ Create or clone repositories, manage pull requests, and even close issues from y
 
 ---
 
+# H is for httpie<div class="text-sm text-primary-lighter">https://github.com/httpie/cli</div>
 
+A colorful modern command-line HTTP client with a more intuitive interface ([docs](https://httpie.io/docs/cli)). Designed for testing & debugging APIs, servers & services.
 
+### Examples
+
+```powershell
+# Stream in json...
+$pwd | Select *Path | ConvertTo-Json | http POST http://httpbingo.org/post
+
+# Type literal json (or forms with -f)
+http http://httpbingo.org/post Path=C:\Users\Jaykul ProviderPath=C:\Users\Jaykul
+
+# Download with --download or via redirection
+http pie.dev/image/png > image.png
+```
+
+### Honorable mention to [sharkdp/hexyl](https://github.com/sharkdp/hexyl)
+
+A simple hex viewer that uses a colored output to distinguish different categories of bytes.
+
+<!--
+
+You can `choco install httpie` or use pip or brew or apt/yum, etc.
+
+<img src="https://camo.githubusercontent.com/d3fea7abd0c9cb12b9627f4408a0559e4e081d4a786db3d7f6bdb9984ca61ada/68747470733a2f2f692e696d6775722e636f6d2f447037576e637a2e706e67" width="80%" />
+
+-->
+
+---
+
+# I is for ImageMagick<div class="text-sm text-primary-lighter">https://imagemagick.org/</div>
+
+So many possibilities for scripting images, from resizing & converting to complex text annotation. Sixels!
+
+<img src="/images/ImageMagickRules.png" width="60%" alt="An imageMagick Screenshot shows an inline image in a terminal"/>
+
+### Examples
+
+```powershell
+magick ./public/images/RateThis.png RateThis.six && get-content RateThis.six
+# convert to sixel and output to pipeline
+magick ./public/images/RateThis.png sixel:-
+```
+
+<!--
+1..5 | % {
+convert -size 50x80 xc: +noise Random -write mpr:noise +delete `
+        mpr:noise -extent 100x80 -compose copy `
+        -page +50-40 mpr:noise -page +50+40 mpr:noise -flatten -write mpr:tile +delete `
+        mpr:tile -virtual-pixel tile `
+        `{ -blur 0x10 -paint 3 `( +clone -shade 120x45 `) +swap  -compose overlay -composite `} `
+        -auto-level -write mpr:geotile +delete `
+        -size 680x200 'xc:#212021' -font Forte -pointsize 72 `
+        -tile mpr:geotile -gravity center -annotate +10+10 'Welcome To\nPowerShell!' `
+        sixel:-
+}
+
+-->
+
+---
+
+# J is for jq<div class="text-sm text-primary-lighter">https://github.com/jqlang/jq</div>
+
+The json query tool lets you slice and filter, map and transform structured data. You don't _need_ jq in PowerShell, but having it can save you time when people's examples use it, and if nothing else, it's a prettier way to display json.
+
+<!-- TODO: I need a better tool for J -- I don't believe in jq -->
+
+### Examples
+
+```powershell
+irm 'https://api.github.com/repos/powershell/powershell/commits?per_page=5'
+| ft @{n="name"; expr={$_.commit.author.name}}, @{n="message"; expr = { $_.commit.message }}
+
+curl 'https://api.github.com/repos/powershell/powershell/commits?per_page=5'
+| jq '.[] | {message: .commit.message, name: .commit.author.login}'
+```
+
+---
+
+# K is for ~~kubectl~~ k9s<div class="text-sm text-primary-lighter">https://github.com/derailed/k9s</div>
+
+A terminal based UI to interact with your Kubernetes clusters.
+
+![alt text](/images/k9spods.png)
+
+<!--
+
+My `k` alias is for `kubectl` and there's no doubt that's one of my highest used CLi tools. In this slot, however, I want to mention a slightly less well known tool. K9s is a terminal dashboard for kubernetes with lots of functionality built in. If you're administering Kubernetes, check it out...
+
+-->
+
+---
+
+# L is for lnav<div class="text-sm text-primary-lighter">https://github.com/tstack/lnav</div>
+
+Logfile Navigator. Try it! There's a 'tutorial1' and a 'playground' you can use to learn what it can do:
+
+```bash
+ssh tutorial1@demo.lnav.org
+```
+
+A TUI with built-in support for syslog, apache, strace, and tcsh history, but very good with any log files that have time stamps. Supports searching, navigation by time, markdown annotations, etc.
+
+**Note:** Windows builds are currently only available on the [ci-build output](https://github.com/tstack/lnav/actions/workflows/c-cpp.yml).
+
+| Logs | Markdown |
+| ---- | ---- |
+| <img src="/images/lnav-logs.png" /> | <img src="/images/lnav-markdown.png" /> |
+
+<!--
+
+This tool is particularly for you if you deal with linux syslog or webserver log files where you just have to know the meanings of the columns. Given a directory of log files, the Logfile Navigator can decompress, _**detect formats**_, and merge all the files to a single view where you can search, filter, and navigate. It can even detect new files and follow renames.
+
+It use color to highlight fields, detects warning and errors, and builds an index that enables quickly navigating to them, and SQL style queries for searching or filtering. It even has tab-completion for simple field value search. It has navigating by timestamps (like going "forward" 2 minutes or 20, or going to specific days, etc.). lnave allows you to write yourself markdown notes about specific lines in the log files.
+
+Hypothetically, you could use this as a pager, but it's a bit of a heavy tool for that, since it starts by creating sqlite databases... But it's amazing for log files.
+-->
+
+---
+
+# M is for Miller<div class="text-sm text-primary-lighter">https://github.com/johnkerl/miller</div>
+
+Miller is for stream-processing tabular data. It has a simple syntax for filtering, transforming, and aggregating data. It even handles a few formats that PowerShell does not, like pretty-printed tabular data and delimited key-value pair data, and can read compressed files.
+
+### Examples
+
+```powershell
+# Flatten json to tabular data ...
+curl 'https://api.github.com/repos/powershell/powershell/commits?per_page=5' -s
+| mlr --ijson --ocsv flatten then cut -f "sha,author.login"
+# Convert (and clean up) TSV data
+helm list -A | mlr --itsv --opprint clean-whitespace then cut -x -f STATUS,CHART
+helm list -A | mlr --itsv --opprint clean-whitespace
+```
+
+<!--
+
+The simplest things you can do with Miller, PowerShell does not need Miller for, because you have ConvertFrom-* and the *-Object commands.
+But miller handles formats that PowerShell doesn't, like zipped files and pretty-printed output, and can flatten structured data like json. It also has a lot of features for cleaning up data.
+
+Here's two trivial examples. Flattening json to csv is a very useful trick, and miller can `unflatten` as well. If you've ever piped helm output to `ConvertFrom-Csv` you'll know Helm mixes spaces and tabs in it's output, and we end up with columns like "NAME " that have a space on the end. Miller's clean-whitespace will remove those spaces and give us nice clean data.
+
+Notice the extra underlines on the headers here:
+
+helm list -A | ConvertFrom-Csv -Delimiter `t | ft NAME*, REVISION*, UPDATED*, *Version
+
+-->
+
+---
+
+# N is for nmap<div class="text-sm text-primary-lighter">https://nmap.org/</div>
+
+<!-- TODO: I don't really even know how to use nmap -->
+
+---
+
+# O is for Ov<div class="text-sm text-primary-lighter">https://github.com/noborus/ov</div>
+
+## Let's talk about pagers
+
+- **More** is a pager. It outputs one page at a time so you can read it all.
+- **Less** does more. We can go _back_, search, _filter_, use colors and your mouse. `less -R --mouse`
+- **Moar** does less. Adds incremental search, syntax highlighting.
+- **Ov** supports tabular data, multiple highlights, configurable keys, named modes...
+
+### Examples
+
+```powershell
+$Env:LESS = '-R --mouse'
+$Env:PAGER = 'ov'
+# Viewing tab-delimited columnar data that's too wide for the screen
+helm list -A | ov --view-mode posix
+# Highlighting ERROR and WARNING lines, etc.
+ov --multi-color "ERROR,WARN,INFO,DEBUG,not,^.{24}" access.log
+# Counting columns to find the index of an error
+ov --jump-target 3 --ruler --line-number --pattern "O is for Ov" './slides.md'
+```
+
+<!--
+Hopefully you all know what a terminal "pager" is: a tool for displaying output or files so you can read a page at a time.
+
+PowerShell ships with paging built-in, but it's honestly _embarrasing_. Hopefully none of you are using `Out-Host -Paging`?
+
+With modern terminals, sometimes you can just output the text, and scroll back in your terminal, but every terminal has a limit, so what do _you_ do, when a command has several times that much output? In the early days of PowerShell, the PowerShell Community Extensions (PSCX) included `less` and because of that, I used it for years, and tended to assume that most people have upgraded to it (even though getting a Windows build can be a little confusing, outside of PSCX, which is a module now).
+
+If you've never read the help for your pager, you should. There are a lot of features and options in there that you probably didn't know about.
+
+Did you know less can support the mouse wheel for scrolling? Did you know it can _filter_ and show only lines that match a pattern?
+
+Whether you're familiar with `less` or not, I encourage you to try my current favorite, ov (or try moar -- the built-in syntax hightlighting is appealing, but not as good as bat's).
+
+Right now my favorite pager is `ov` because it gives me everything I used in less, plus column support, configurable modes, multi-word search and incremental search. I use `bat` for source files, but with ov as the pager.
+-->
+
+---
+
+# P is for Pandocc<div class="text-sm text-primary-lighter">https://github.com/jgm/pandoc</div>
+
+If you need to convert text files from one markup format into another, pandoc is your swiss-army knife.
+
+### Examples
+
+```powershell
+# Output ANSI escape sequences for a markdown file
+pandoc -s README.md -t ansi
+# Convert a markdown file to a Jupyter notebook
+pandoc -s README.md -o README.ipynb
+# Convert a markdown file to Textile (we use Jira)
+pandoc -s README.md -o README.textile
+```
+
+Did you know you can use pandoc as a lua interpreter? Just run `pandoc lua` ...
+
+<!--
+I really struggled to choose just one tool for the letter P, there are so many very useful tools: Packer, PowerShell, Python, Peazip... but I was never tempted by Perl.
+
+I picked Pandoc as one I thought less people would be familiar with, to add value to your collection.
+
+-->
+---
+
+# Q is for qrc<div class="text-sm text-primary-lighter">https://github.com/fumiyas/qrc</div>
+
+QRC is a helpful little command-line tool for generating QR codes _inside_ your terminal.
+
+### Examples
+
+```powershell
+  qrc "https://HuddledMasses.org"
+  qrc "MAILTO:Jaykul@HuddledMasses.org"
+  qrc "WIFI:S:guestwifi;T:WPA;P:we are not allowed to share that;;"
+```
+
+<!--
+
+This one's a little helper that generates QR Codes in your terminal. It doesn't have many options, but it can output sixel or use ASCII blocks to output to a terminal.
+
+-->
+
+---
+
+# R is for RipGrep<div class="text-sm text-primary-lighter">https://github.com/BurntSushi/ripgrep</div>
+
+Ripgrep _recursively_ searches directories for files and then for text matchin a regex pattern. Respects .gitignore, and has switches to search specific file types, and can do globbing.
+
+### Examples
+
+```powershell
+rg --tyaml "dev" --iglob "**/*prod/*"
+
+```
+<!--
+RipGrep is fast, and is the go-to tool for searching text when it hasn't ben indexed.
+
+TODO: Copy more examples from work.
+-->
+---
+
+# S is for SOPS<div class="text-sm text-primary-lighter">https://github.com/getsops/sops</div>
+
+SOPS is a tool for managing secrets in configuration files, encrypting with Age, PGP, Azure Key Vault, AWS KMS or GCP KMS.
+
+Demonstrating it's full use is practically a session in itself, here's an example of encrypting a Kubernetes secrets file:
+
+```powershell
+$key = age-keygen -y $Env:AppData\sops\age\keys.txt
+sops -e -i --age $key --encrypted-regex '^(data|stringData)$' .\secret.yaml
+Get-Content '.\secret.yaml'
+```
+
+And decrypting it:
+
+```powershell
+sops ./secret.yaml
+```
+
+---
+
+# <div class="text-2xl">T is for Terraform (Tofu)</div><div text="sm primary-lighter">https://github.com/hashicorp/terraform</div><div class="text-sm text-primary-lighter">https://github.com/opentofu/opentofu</div>
+
+The cross-cloud, cross-platform, infrastructure as code tool.
+<!-- Tofu is a fork of Terraform due to the license changes prior to Hashicorp's purchase by IBM. -->
+
+# <div class="text-2xl">Tailscale</div><div class="text-sm text-primary-lighter">https://github.com/tailscale/tailscale</div>
+
+The easiest way to use Wireguard. Connect and disconnect, serve content and local services, etc.
+
+# <div class="text-2xl">Tig</div><div class="text-sm text-primary-lighter">https://github.com/jonas/tig</div>
+
+A text user interface that can be used to browse your git repo, stage and commit changes.
+
+---
+
+# U is for Ubuntu
+
+<!-- TODO: I need a tool here -->
+
+---
+
+# V is for VaultCmd
+
+Vaultcmd is a Windows-only tool for managing Windows Credential Manager Vaults
+
+<!-- TODO: A better tool -->
+
+---
+
+# W is for WezTerm and Windows Terminal
+
+# W is for Wush (a wireguard powered file-transfer tool)
+
+# W is for Winget
+
+# W is for Wsl
+
+---
+
+# X is for xcopy (and RoboCopy, I guess)
+
+<!--
+TODO: Should this be xargs instead?
+gruntwork-io/git-xargs
+
+git-xargs \
+  --branch-name test-branch \
+  --github-org <your-github-org> \
+  --commit-message "Create hello-world.txt" \
+  touch hello-world.txt
+
+-->
+
+---
+
+# Y is for yq<div class="text-sm text-primary-lighter">https://github.com/mikefarah/yq</div>
+
+yq is a command-line structured data processor, like `jq` but with support for yaml, json, xml, properties, csv, tsv and toml. It doesn't support quite everything that jq does, but it's faster...
+
+### Examples
+
+```powershell
+# Check the image versions in a deployment
+yq '.spec.template.spec.containers[].image' ./deployment.yaml
+# Update in place, the image for the first container
+yq -i '.spec.template.spec.containers[0].image = "ghcr.io/stefanprodan/podinfo:6.8.0"' ./deployment.yaml
+```
+
+---
+
+# Z is for zstd and zpaq<div class="text-sm text-primary-lighter">
+
+ZPAQ (Matt Mahoney, 2009) Open Source archive format, computing intensive, providing very high compression ratio, supersedes previous PAQ format, multiple times [Hutter Prize](http://prize.hutter1.net/) winner.
+
+ZSTD (Yann Collet, Przemysław Skibiński, Facebook, 2015) Open Source pure compression format, Zstd compressor was developed with same scope of Brotli (Google, 2013), also very flexible and being capable of deliver high compression ratio in alternative to impressive (de)compression speed.
 
 ---
 layout: image-right
