@@ -8,4 +8,20 @@ C is for carapace, choco, chezmoi, completions, installing, and syncing, voila!
 
 D is for dotnet new, a better way to template your projects, that doesn't need to rhyme to be cool.
 
-and d is for dotnet new, and e is for earthly, and f is for fd, and g is for git, and h is for helm, and i is for ip, and j is for jq, and k is for k9s, and l is for lsd, and m is for make, and n is for nmap, and o is for open, and p is for pandoc, and q is for q, and r is for rg, and s is for skaffold, and t is for terraform, and u is for up, and v is for vcpkg, and w is for wget, and x is for xargs, and y is for yq, and z is for zstd.
+---
+
+c is for chezmoi, choco, carapace, schollz/croc, hpjansson/chafa (https://hpjansson.org/chafa/) and curl.
+and d is for dotnet new or delta or doggo, and e is for earthly, and f is for fd, and g is for git or gh, and h is for helm or sharkdp/hexyl or httpie, and i is for ip, and j is for jq or jupyter, and k is for k9s, and l is for lsd, and m is for miller or make, and n is for nmap, and o is for open, and p is for pandoc, and q is for q, and r is for rg, and s is for skaffold or stern, and t is for terraform or terjira, and u is for up, and v is for vcpkg, and w is for wget or weasyprint, and x is for xargs, and y is for yq, and z is for zstd.
+
+
+https://dystroy.org/broot
+https://github.com/stern/stern
+
+
+```powershell
+$Executables = `
+Get-ChildItem *.exe -OutVariable exes |
+Get-Random -count 20 |
+Format-Table Mode, Name, Length |
+Out-String
+```
