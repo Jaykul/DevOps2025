@@ -1,0 +1,22 @@
+title: CLI Tools for DevOps
+level: 1
+info: |
+  # CLI Tools for DevOps
+
+  Learn more at [HuddledMasses.org/CliTools](https://HuddledMasses.org/CliTools)
+keywords: CLI,Tools,DevOps,Utilities,QuickTake
+drawings:
+  persist: false
+transition: slide-left
+mdc: true
+
+theme: ./theme
+highlighter: shiki
+lineNumbers: false
+
+defaults:
+  leftFooter: /images/cc-by-sa.svg
+  rightHeader: /images/PSDOGSummit.png
+  layout: default
+layout: cover
+background: images/E2984F049253590FFACD39F2C701E67920AB36C97BEF97AFD491B673980B991A.jpg

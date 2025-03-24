@@ -1,97 +1,3 @@
----
-title: CLI Tools for DevOps
-level: 1
-info: |
-  # CLI Tools for DevOps
-
-  Learn more at [HuddledMasses.org/CliTools](https://HuddledMasses.org/CliTools)
-keywords: CLI,Tools,DevOps,Utilities,QuickTake
-drawings:
-  persist: false
-transition: slide-left
-mdc: true
-
-theme: ./theme
-highlighter: shiki
-lineNumbers: false
-
-defaults:
-    leftFooter: /images/cc-by-sa.svg
-    rightHeader: /images/PSDOGSummit.png
-    layout: default
-layout: cover
-background: images/E2984F049253590FFACD39F2C701E67920AB36C97BEF97AFD491B673980B991A.jpg
----
-
-<span class="text-8xl text-white" style="font-weight:700;" >
-    Command<span class="text-blend">Line</span> <!-- <logos-git-icon /> --> <!--light-icon icon="git-pull-request"/-->
-</span>
-<div class="text-5xl text-primary-lighter mb-2rem" style="font-weight:500;" >
-    Tools for DevOps
-</div>
-<div>
-    Joel Bennett
-</div>
-<div class="bg-blend">
-    @Jaykul
-</div>
-
-<div class="bottom-5 absolute">
-    April 7-10, <span class="text-blend">2025</span>
-</div>
-<div class="top-2 left-2 absolute text-align-center">
-    PowerShell + DevOps<br/>
-    <span class="text-blend">Global Summit</span>
-</div>
-
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
-
----
-layout: cover
-background: images/Sponsors.png
-routeAlias: Sponsors
-title: Sponsors
-level: 2
----
-
----
-layout: image-right-pop
-image: https://HuddledMasses.org/assets/images/avatar.png
-routeAlias: About Me
-title: About Me
-level: 2
----
-
-# Joel "Jaykul" Bennett
-
-## Principal DevOps Engineer
-
-``` text
-Solving problems with code
-15x Microsoft MVP for PowerShell
-```
-
-  <div class="absolute bottom-16 left-16">
-    <a href="https://github.com/Jaykul"><logos-github-icon /> github.com/Jaykul</a> and <a href="https://github.com/PoshCode">PoshCode</a><br/>
-    <a href="https://discord.gg/PowerShell"><logos-discord-icon /> discord.gg/PowerShell</a><br/>
-    <a href="https://HuddledMasses.org"><emojione-statue-of-liberty /> HuddledMasses.org</a><br/>
-    <a href="https://fosstodon.org/@Jaykul"><logos-mastodon-icon /> @Jaykul@FOSStodon.org</a><br/>
-  </div>
-
-<!--
-
-For those of you who came to this talk despite not knowing me, thank you, and let me introduce myself.
-
-I'm Joel Bennett, and I'm from upstate New York by way of the grasslands of Guanacaste, Costa Rica. I have been "Jaykul" (J. Cool) online since the 1990s, and I'm currently a Principal DevOps Engineer! I've been solving problems with code since the last century, and I've been recognized as a Microsoft MVP for PowerShell fifteen times in a row now. I am an open source developer, and I coordinate the official PowerShell support chat and virtual user group, so you can find me on GitHub, Discord, Mastodon, and more rarely on Slack and Twitter, and I'm always happy to chat about PowerShell, DevOps, GitOps.
-
--->
-
----
-
 # A is for age<div class="text-sm text-primary-lighter">https://github.com/FiloSottile/age</div>
 
 A simple, modern and secure encryption tool with small keys, no config options, and pipeline composability. (See also [rage](https://github.com/str4d/rage) and [typage](https://github.com/FiloSottile/typage)).
@@ -635,26 +541,10 @@ yq -i '.spec.template.spec.containers[0].image = "ghcr.io/stefanprodan/podinfo:6
 
 ---
 
-# Z is for zstd and zpaq<div class="text-sm text-primary-lighter">
+# Z is for zip, zstd and zpaq<div class="text-sm text-primary-lighter"></div>
 
-ZPAQ (Matt Mahoney, 2009) Open Source archive format, computing intensive, providing very high compression ratio, supersedes previous PAQ format, multiple times [Hutter Prize](http://prize.hutter1.net/) winner.
+ZPAQ (Matt Mahoney, 2009) https://mattmahoney.net/dc/zpaq.html Open Source (now public domain) archive format, computing intensive, providing very high compression ratio, supersedes previous PAQ format, multiple times [Hutter Prize](http://prize.hutter1.net/) winner.
 
-ZSTD (Yann Collet, Przemysław Skibiński, Facebook, 2015) Open Source pure compression format, Zstd compressor was developed with same scope of Brotli (Google, 2013), also very flexible and being capable of deliver high compression ratio in alternative to impressive (de)compression speed.
+ZSTD (Yann Collet, Przemysław Skibiński, Facebook, 2015) https://github.com/facebook/zstd Open Source (BSD OR GPLv2) pure compression format, Zstd compressor was developed with same scope of Brotli (Google, 2013), also very flexible and being capable of deliver high compression ratio in alternative to impressive (de)compression speed.
 
----
-layout: image-right
-image: /images/RateThis.png
-routeAlias: ThankYou
-title: Thank You
-level: 2
-rightHeader: /images/PSDOGSummit.png
----
-
-<div class="text-blend text-7xl" style="font-weight:700;" >
-THANK YOU!
-</div>
-<div class="text-6xl top-20 relative" style="font-weight:700;" >
-Feedback is a gift. Please review this session!
-</div>
-
-<!-- TODO: Make a layout where this image and the header/foooter images can all show up -->
+Honorable mention: PeaZip is a cross-platform CLI and GUI wrapper that ships with both of these and more, and has a clever "unzip in new smart folder" feature. https://github.com/peazip/PeaZip/

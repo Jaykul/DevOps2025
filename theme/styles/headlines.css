@@ -7,7 +7,8 @@ h1 {
 
   &::before {
     box-shadow: var(--slidev-theme-header-shadow);
-    background: var(--slidev-theme-default-headingBg);
+    background: var(--slidev-theme-gradient);
+    border-radius: .25em;
     content: " ";
     display: block;
     position: absolute;
@@ -27,7 +28,7 @@ h1 {
 }
 
 .cover h1 {
-  color: var(--slidev-theme-cover-headingColor);
+  /* color: var(--slidev-theme-cover-headingColor); */
   padding: 0.25em 0.5em;
   margin: 0;
 
@@ -36,12 +37,12 @@ h1 {
     height: calc(100% - 0.25em);
     margin-left: -0.25em;
     margin-top: -0.12em;
-    background: var(--slidev-theme-cover-headingBg);
+    /* background: var(--slidev-theme-cover-headingBg); */
   }
 }
 
 .section h1 {
-  color: var(--slidev-theme-section-headingColor);
+  /* color: var(--slidev-theme-section-headingColor); */
   font-size: 2.25rem;
   line-height: 2.5rem;
   margin-left: -0.05em;
@@ -50,50 +51,50 @@ h1 {
   position: relative;
   margin-bottom: 0;
 
-  &::before {
-    background: var(--slidev-theme-section-headingBg);
-  }
+  /* &::before {
+    background: var(----slidev-theme-section-headingBg);
+  } */
 }
 
 .center h1 {
   width: -moz-fit-content;
   width: fit-content;
-  color: var(--slidev-theme-center-headingColor);
+  /* color: var(--slidev-theme-center-headingColor); */
   margin-bottom: 0;
 
-  &::before {
+  /* &::before {
     background: var(--slidev-theme-center-headingBg);
-  }
+  } */
 
   code {
     background: transparent !important;
   }
 }
 
-.two-columns h1 {
+/* .two-columns h1 {
     color: var(--slidev-theme-default-headingColor);
 
     &::before {
       background: var(--slidev-theme-default-headingBg);
     }
-  }
+  } */
 
 
-.image h1 {
+/* .image h1 {
   color: var(--slidev-theme-image-headingColor);
 
   &::before {
     background: var(--slidev-theme-image-headingBg);
   }
-}
+} */
 
 .about-me h1 {
-  color: var(--slidev-theme-aboutme-helloColor);
+  /* color: var(--slidev-theme-aboutme-helloColor); */
   padding: 0.25em;
   font-weight: bold;
   font-size: 3em;
 
-  &::before {
+  /* &::before {
     background: var(--slidev-theme-aboutme-helloBg);
-  }
+  } */
 }

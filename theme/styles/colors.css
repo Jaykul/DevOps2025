@@ -89,6 +89,7 @@ html:not(.dark) {
 
   /* Header shadow */
   --slidev-theme-header-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  --slidev-theme-gradient: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
 
   /*  Default */
   --slidev-theme-default-headingBg: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
@@ -121,4 +122,17 @@ html:not(.dark) {
   --slidev-theme-aboutme-helloBg: var(--slidev-theme-brightYellow);
   --slidev-theme-aboutme-helloColor: var(--slidev-theme-background);
   --slidev-theme-aboutme-nameColor: var(--slidev-theme-brightRed);
+}
+
+.text-blend {
+  background: var(--slidev-theme-gradient);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.bg-blend {
+  background: var(--slidev-theme-gradient);
+  padding: 0 1em;
+  border-radius: .25em;
 }
