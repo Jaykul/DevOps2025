@@ -116,27 +116,37 @@ Consistency (noun): Reliability, uniformity, or conformity. Logical coherence. A
 - [Supporting Wildcard Characters in Parameters](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/supporting-wildcard-characters-in-cmdlet-parameters)
 - [Input Filter Parameters](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/input-filter-parameters)
 - [Parameter Binding by Property Name](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parameter_binding)
-- [Extending Output Objects](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/extending-output-objects)
 - [About_Classes](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_classes)
+- [Extending Output Objects](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/extending-output-objects)
 - [Custom Formatting Files](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/custom-formatting-files)
 
 </v-clicks>
 
 <!--
 
-Jeffrey Snover used to talk about the "Pit of Success" -- the idea that PowerShell is designed to make it easy to do the right thing, and hard to do the wrong thing.
+Microsoft likes to talk about the "Pit of Success".
+Jeffrey Snover always says they tried to design PowerShell to
+make it _easy to do the right thing, and hard to do the wrong thing_.
 
-As tool authors, we get to take advantage of a lot of that, and a big part of it,
-is about consistency and predictability. I talk about this a lot, but I only have 25 minutes right now,
-so I just want to quickly give you some ideas, about how to write _consistent_ commands by following the PowerShell conventions.
+As tool authors, we get to take advantage of that design effort,
+but we need to _keep that goal in mind_. Ok, I like to talk about _design_,
+but I have less than 20 minutes right now, let's just restate the goal:
 
-So for each bullet point here, I guarantee an internet search will turn up **official** documentation on learn.microsoft.com with a whole lot more details.
+A well-designed tool makes it easy to do the right thing, and impossible to (or obvious when you) do the wrong thing.
+
+For PowerShell tools, a big part of that is consistency and predictability.
+This slide is to remind you that there's a lot of guidance about
+how to write _consistent_ and _predictable_ commands.
+
+If you search for _any_ of these bullet points
+you will turn up **official** documentation (on learn.microsoft.com)
+with a lot more details.
 
 - [click] We have a set of approved verbs, which help users identify what a command does.
 - [click] We have guidelines for picking nouns. Here's a hint: use the name of the _type_ of the object you're going to output.
 - [click] We have a set of common parameters, and help for implementing them. These help everyone understand your commands and use them safely.
-- [click] We also have an _extended_ list of ["standard" parameter names and types](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/standard-cmdlet-parameter-names-and-types), over a hundred and tewnty-five different parameter names in 7 categories that are usually understoon, and guidelines for the data types you should use for them.
-- On top of that, [click] We have a lot of options for -validating parameter input
+- [click] We also have an _extended_ list of ["standard" parameter names and types](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/standard-cmdlet-parameter-names-and-types), over a 125 different parameter names that are usually well understood across 7 categories, and guidelines for the data types you should use for them.
+- On top of that, [click] We have a lot of options for _validating_ parameter input
 - And [click] To give you back some naming flexibility, there are command aliases
 - [click] And parameter aliases, so you can help people _find_ the right command or parameter, when you know some people will guess wrong.
 
@@ -146,47 +156,29 @@ We also have a lot of tooling in the language for implementing things consistent
 - [click] We have design and implementation support for wildcard characters
 - [click] And standard parameters for filtering input
 
-Finally, although PowerShell has built-in support for
-- [click] Writing your own data classes
-- And [click] binding parameters from pipeline input objects
-- There is also support for [click] extending built-in types without writing your own
-- [click] And custom formatting, so you can control how objects are displayed in the output, without needing to change the types.
+Finally, remember that PowerShell also has built-in support for
+[click] binding parameters from pipeline input objects _and their properties_,
+and therefore, you should consider [click] writing your own data classes,
+but you can also [click] extend the built-in types instead, and you have
+[click] total control over how those objects are displayed...
 
-All of this is designed to work together to help users do the right thing, and to help them discover the right way to use the tools that you write.
+All of this design work was done by Microsoft to make it easy for you to help users _do the right thing_, and _discover_ the **best** way to use the tools that you write.
 
-That's the ground work.
-
-
-
-
-
-
-
-
-
+Let's look at a few more concrete examples:
 -->
 
 ---
 
 # Poka-Yoke for PowerShell
 
-## Make User Mistakes Impossible
+## Make Mistakes Impossible
 
 <v-switch>
 <template #1>
 
-### Consistency: Verbs, Nouns, Parameters
-
-PowerShell has a lot of consistency built in. A set of approved verbs. Common parameters. Common patterns for formatting output.
-
-2. About Documentation and Help
-3. Argument Transformation
-4. Argument Completers
-
-</template>
-<template #2>
-
 ### Use CmdletBinding to Support Common Parameters
+
+<!-- Highlight lines 4 through 6 -->
 
 ```powershell {4-6}
 class Player { [string]$Name; [Position]$Position; [string] ToString() { return $this.Name } }
@@ -199,13 +191,31 @@ function Move-Player {
 ```
 
 </template>
-<template #3>
+<template #2>
 
 ### Strongly Type Variables and Parameters
 
-<!-- Highlight lines 3 and 8 -->
+<!-- Highlight lines 1 and 6 -->
 
 ```powershell {1,6}
+enum Direction { North; East; South; West }
+
+function Move-Player {
+    [CmdletBinding()]
+    param(
+        [Direction]$Direction,
+        [int]$Distance,
+        [switch]$Force
+    )
+    ...
+```
+
+</template>
+<template #3>
+
+### Carefully Choose Parameter Names
+
+```powershell {6,7}
 enum Direction { North; East; South; West }
 
 function Move-Player {
@@ -233,7 +243,7 @@ function Move-Player {
     }
     $true
 })]
-[ValidateRange(1, 10)]
+[ValidateRange(1, 8)]
 [int]$DistanceInMeters,
 
 [ValidateScript({ Test-Path $_ })]
@@ -242,6 +252,29 @@ function Move-Player {
 
 </template>
 <template #5>
+
+### ArgumentCompletion, IValidateSetValuesGenerator, ArgumentCompleter
+
+```powershell {3-13}
+[ValidateSet("North", "East", "South", "West")]
+[Direction]$CardinalDirection,
+[ArgumentCompleter({ param($Name, $Parameter, $Partial, $Ast, $Bound )
+    @(switch($Bound.CardinalDirection) {
+        North { ($Player.Position.Y)..0 }
+        South { (8-$Player.Position.Y)..0 }
+        East  { (8-$Player.Position.X)..0 }
+        West  { ($Player.Position.X)..0 }
+        default {
+            ($Player.Position.X, $Player.Position.Y, (8 - $Player.Position.X), (8 - $Player.Position.Y) | Sort -Desc)[0]..0
+        }
+    }) | Where { $_ -gt 0 } # Zero isn't a valid move
+})]
+[int]$DistanceInMeters
+...
+```
+
+</template>
+<template #6>
 
 ### Support -WhatIf and -Confirm
 
@@ -253,9 +286,9 @@ param(
     [switch]$Force
 )
 switch($CardinalDirection) {
-    North { $NewPosition = [Position]@{ Y = $Player.Position.Y + $DistanceInMeters; X = $Player.Position.X } }
+    North { $NewPosition = [Position]@{ X = $Player.Position.X; Y = $Player.Position.Y - $DistanceInMeters; } }
     East  { $NewPosition = [Position]@{ X = $Player.Position.X + $DistanceInMeters; Y = $Player.Position.Y } }
-    South { $NewPosition = [Position]@{ Y = $Player.Position.Y - $DistanceInMeters; X = $Player.Position.X } }
+    South { $NewPosition = [Position]@{ X = $Player.Position.X; Y = $Player.Position.Y + $DistanceInMeters;  } }
     West  { $NewPosition = [Position]@{ X = $Player.Position.X - $DistanceInMeters; Y = $Player.Position.Y } }
 }
 if ($Force -or $PSCmdlet.ShouldProcess($Player.Name, "Move ${DistanceInMeters} meters ${CardinalDirection} to ${NewPosition}")) {
@@ -269,20 +302,271 @@ if ($Force -or $PSCmdlet.ShouldProcess($Player.Name, "Move ${DistanceInMeters} m
 
 There are many ways to prevent mistakes in PowerShell.
 
-_Remember: To run these as demos, pre-run demos-1.ps1_
+<p class="text-sm text-green italic">Remember: To run these as demos, pre-run demos-1.ps1</div>
 
-[click]Predictable names for commands and parameters, working together with tab-completion, and the absolute best way to help your users avoid making mistakes.
+[click]Always use CmdletBinding. It's necessary to support the common parameters that users expect, and it's the easiest way to make sure users can **only** pass the parameters you expect.
 
-[click]Always use CmdletBinding. It's necessary to support the common parameters that users expect, and it's the easiest way to make sure users can only pass the parameters you expect.
+[click]Strongly-typed parameters can prevent a lot of mistakes (or at least, prevent them from executing).
 
-[click]Strongly-typed parameters can prevent a lot of mistakes (or at least, prevent them from executing). Incidentally, note the naming here too: "CardinalDirection" is more specific than "Direction" (and eliminates "Up" and "Down") as "DistanceInMeters" is more specific than "Distance" -- additionally, by adding "Cardinal" the parameters start with different letters, making them easier to tab complete.
+Ok, now check out those parameter names. Remember....
+
+[click]Carefully choosing names for your commands and parameters, makes them easier to use. "CardinalDirection" is more specific than "Direction" -- this helps your user eliminate "Up" and "Down" or "Left" and "Right" as options. "DistanceInMeters" is also more specific than "Distance" -- having units in the parameter name eliminates guessing, and the nead to consult the documentation. You **can** add "Direction" as an alias to "CardinalDirections" so people can still use that, or to match pipeline object properties, but if you leave it off, all your parameters start with different letters, making them easier to tab complete.
 
 [click]Validation attributes can do some of the same things as strongly-typed parameters, but they can be more flexible, and can even take other parameters into account.
 
-[click]Support -WhatIf and -Confirm, so that users can check, and set ConfirmImpact=High if you do something irreversible.
+[click]ArgumentCompletion is like ValidateSet for completion, but without blocking other values. IValidateSetValuesGenerator is similar, but more dynamic, since it executes code to calculate the possible values. Finally, ArgumentCompleter is the most powerful. It gives us dynamic, context-aware tab completion that is one of the best ways to help users avoid mistakes -- and it lets you consider the AST and the already bound parameters.
 
-make them very obvious From stringly typed parameters to validation attributes, there are many ways to prevent mistakes from being made.
+[click]When you can, support ShouldProcess so users can run `-WhatIf`, and remember to set ConfirmImpact=High if you do something irreversible.
+
+So far, we've only talked about the user interface to your functions and modules, but what about when we're writing the code itself?
 -->
+
+---
+
+# Poka-yoke for PowerShell
+
+## Make Mistakes Impossible
+
+<v-switch>
+<template #1-6>
+
+### Write Regression Tests
+
+</template>
+<template #2-6>
+
+- Made a mistake?
+
+</template>
+<template #3-6>
+
+- Write a test!
+
+</template>
+<template #4-6>
+
+- Fix the mistake
+
+</template>
+<template #5-6>
+
+- Integrate the test
+
+</template>
+<template #6-10>
+
+### Use PSScriptAnalyzer
+
+</template>
+<template #7-10>
+
+Consistency (noun): Reliability, uniformity, or conformity. Logical coherence. A singular way of doing things. {.text-color-yellow}
+
+</template>
+<template #8-10>
+
+#### Consistency facilitates intuition
+
+</template>
+<template #9-10>
+
+#### Consistency increases maintainability
+
+</template>
+</v-switch>
+
+<!--
+## What would you all say is the best way to **stop** yourself from _repeating_ a mistake?
+
+My answer is: [click]**regression tests**.
+
+- [click]Any time you find a mistake...
+- [click]Write a test that fails because of that mistake
+- [click]Fix the mistake so that the test passes
+- [click]And then ... make sure that test runs every time you make a change
+
+Over time, your project will build up a collection of test cases highlighting previous mistakes, and not only will this prevent you from repeating mistakes, if you label them well, they can serve as a valuable learning tool for people who are joining a project for the first time.
+
+Speaking of ways to help new people avoid mistakes...
+
+## [click]Use PSScriptAnalyzer
+
+Remember our definition from earlier, when we were talking about the pit of success?
+
+[click]PSScriptAnalyzer will help you remember a lot of the rules we talked about from the PowerShell design.
+
+PSScriptAnalyzer is a linter. It checks for obvious errors and common bugs,
+and helps you to identify style and [click]consistency issues.
+You might file that under the category of making mistakes more obvious,
+but I like to think mistakes have not been made until we try to run the code,
+so if you [click]run the linter automatically (in VSCode, and in your CI/CD)
+it can be like a levelling up from a spell-checker to a grammar checker,
+it can _prevent_ mistakes from getting out.
+
+Remember that you can also add your own rules, if you run into specific bugs or errors you can't detect with regression tests...
+
+-->
+
+---
+layout: image-right
+image: /images/PDCA-Cycle.webp
+---
+# Continuous Improvement
+
+<v-switch>
+<template #1-20>
+
+## Plan-Do-Check-Act
+
+<br/>
+
+</template>
+<template #2-20>
+
+1. **Plan**: Identify your (possible) problems
+
+</template>
+<template #3-20>
+
+### The Five Whys {.pl-8 .mt-0!}
+
+</template>
+<template #4-20>
+
+Ask Why, Five Times. {.pl-8 .mt-0!}
+
+</template>
+<template #5-11>
+
+#### Our deployments are failing
+
+</template>
+
+<template #6-11>
+
+  1. Why? Our "publish" step is failing to upload.
+
+</template>
+<template #7-11>
+
+  2. Why? Some sort of error authenticating to the service.
+
+</template>
+<template #8-11>
+
+  3. Why? It turns out the credentials are wrong.
+
+</template>
+<template #9-11>
+
+  4. Why? Well, the password expired.
+
+</template>
+<template #10-11>
+
+  5. Why? Because we forgot to change the password ahead of time.
+
+</template>
+
+<template #11-20>
+
+2. **Do**: Design mistake-proofing solutions
+
+</template>
+<template #12-20>
+
+3. **Check**: Test and validate your solutions
+
+</template>
+<template #13-20>
+
+4. **Act**: Implement and train your team(s)
+
+</template>
+</v-switch>
+
+<!--
+
+Poka-Yoke is part of the discipline of continuous improvement, and I want to talk about that cycle for a minute.
+
+Continuous improvement is not always about iterating on _the same_ product over and over.
+
+In DevOps, particularly, we almost always have many products and projects,
+and a wide range of different tools and solutions that we're responsible for.
+So, I don't know about your teams, but mine tends to switch _between_ projects based on
+external factors like ...
+
+- What management is excited about this month
+- What caused the most recent outage
+
+But regardless of whether you're continually iterating on the same product,
+or you just have an opportunity to do one or two cycles of improvements,
+the process is basically the same.
+
+[click] They call it: Plan, Do, Check, Act (PDCA).
+
+[click] The first step is always to identify the problem.
+
+Sometimes, we're only going through this process because somebody _else_ has **already** identified a problem, but even then ...
+
+We need to understand it, and determine why it happened: the root cause.
+
+The simplest form of root-cause analysis, we just call
+
+[click]The five whys.
+[click]It literally consists of asking "why" five times; each time directing the question at the answer to the previous question.
+
+So let's take an example. Say I come to you, and I say:
+
+[click] Our website deployments are failing.
+
+You say ...
+- Why? [click]Because the "publish" step is failing to upload
+- Why? [click]Because there was an error authenticating to the service
+- Why? [click]Because the credentials were wrong.
+- Why? [click]Because the password expired overnight.
+- Why? [click]Because we forgot to change the password ahead of time.
+
+This way, you dig deeper toward a root cause. (This technique _also_ came out of Toyota, by the way.)
+
+Okay, so we've identified the problem, and we think we've identified the root cause. Let's move on to the next step.
+
+-->
+
+---
+
+# Do
+
+## Design Poka-Yoke Solutions
+
+---
+
+# Check
+
+## Test and Validate Your Solutions
+
+Use it. Write tests. Verify the mistakes are are impossible -- or obvious.
+
+If your solution works, move on to the next error. Otherwise, try another solution.
+
+<!--
+
+The bottom line is: do what used to cause the problem. See if your solution prevents the problem.
+
+Ideally, you'll have unit tests that reproduce the problem, and you can verify that your solution prevents it.
+
+Worst case, you need to have new users try the tool with the solution in place, and verify they don't have problems.
+
+-->
+
+---
+
+# TODO
+
+<!-- Three basic principles of defects:
+* Don't create a Defect.
+* Don't accept a D​efect.
+* Don't pass on a Defect. -->
 
 ---
 
@@ -293,9 +577,6 @@ make them very obvious From stringly typed parameters to validation attributes, 
 ### Handle Known Errors Gracefully
 
 Provide user-actionable information for every expected error that you can't prevent.
-
-
-
 
 ### Validate Inputs Up Front, Output Helpful Errors & Suggestions
 
@@ -313,8 +594,6 @@ function Move-Player {
     }
     ...
 ```
-
-
 
 <!--
 
@@ -341,79 +620,10 @@ Instead of "Argument out of bounds" or "Invalid argument" -- indicate the valid 
 
 ---
 
-# Poka-yoke for PowerShell
-
-## Make Your Own Mistakes Impossible
-
-<v-switch>
-<template #1-6>
-
-### Write Regression Tests
-
-</template>
-<template #2-6>
-- Made a mistake?
-</template>
-<template #3-6>
-- Write a test!
-</template>
-<template #4-6>
-- Fix the mistake
-</template>
-<template #5-6>
-- Integrate the test
-</template>
-<template #6-10>
-
-### Use PSScriptAnalyzer
-
-</template>
-<template #7-10>
-
-Consistency (noun): Reliability, uniformity, or conformity. Logical coherence. A singular way of doing things. {.text-color-yellow}
-
-</template>
-<template #8-10>
-
-#### Consistency facilitates intuition
-
-</template>
-<template #9-10>
-
-#### Consistency increases maintainability
-
-</template>
-</v-switch>
-
-<!--
-Let's switch gears a little and talk about ways to prevent our own mistakes.
-
-## What would you all say is the best way to stop yourself from _repeating_ a mistake?
-
-My answer is: [click]**regression tests**.
-
-- [click]Any time you find a mistake...
-- [click]Write a test that fails because of that mistake
-- [click]Fix the mistake so that the test passes
-- [click]And then ... make sure that test runs every time you make a change
-
-Another tool to prevent mistakes (and increase their visibility)...
-
-## [click]PSScriptAnalyzer is a PowerShell linter
-
-Linters check for obvious errors and common bugs, and help you to identify style and consistency issues.
-Normally, this would fall under the category of making mistakes more obvious,
-but if we consider a mistake hasn't really been made until you try to run it,
-linters (and even spell-checkers) can prevent mistakes.
-
-On shared projects, consider extending PSScriptAnalyzer to enforce your own rules.
--->
-
----
-
 # TODO
 
 <!--
+
 - **Prevent** mistakes from being made:
   - Documentation (help)
   - Strongly typed parameters
@@ -424,117 +634,6 @@ On shared projects, consider extending PSScriptAnalyzer to enforce your own rule
   - Output Errors (don't suppress unexpected errors)
 - **Learn** from mistakes:
   - Logging (to a file, or to the event log)
-  - Error Reporting (to a ticketing system, or to a chat channel) -->
-
----
-layout: image-right
-image: /images/PDCA-Cycle.webp
----
-
-# Plan-Do-Check-Act
-
-## The cycle of continuous improvement
-
-<br/>
-
-1. **Plan**: Identify your (possible) problems
-2. **Do**: Design mistake-proofing solutions
-3. **Check**: Test and validate your solutions
-4. **Act**: Implement and train your team(s)
-
-<!--
-
-I like to create and use Poka-Yoke as solutions in our cycles of continuous improvement, so let's talk about that cycle for a minute.
-
-Continuous improvement is not always about iterating on _the same_ product over and over.
-
-In DevOps, particularly, we almost always have many products and projects,
-and a wide range of different tools and solutions that we're responsible for.
-I don't know about your teams, but mine tends to switch _between_ projects based on
-external factors like ...
-
-- What management is excited about this month
-- What caused the most recent outage
-
-But regardless of whether you're continually iterating on the same product,
-or you just have an opportunity to do one or two cycles of improvements,
-the process is basically the same...
+  - Error Reporting (to a ticketing system, or to a chat channel)
 
 -->
----
-
-# Plan
-
-## <v-click>Identify the problem</v-click>
-## <v-click>Find the root cause</v-click>
-## <v-click>Ask "why?" five times</v-click>
-### <v-click>Let's take an example</v-click><v-click>. Our deployments are failing.</v-click>
-<v-clicks>
-
-1. Why? Because the "publish" step is failing to upload.
-1. Why? Because there was an error authenticating to the service.
-1. Why? Because the credentials are wrong.
-1. Why? Because the password expired overnight.
-1. Why? Because we forgot to change the password ahead of time.
-
-</v-clicks>
-
-<!--
-
-[click] The first step is always to identify the problem.
-
-Well, sometimes, we're only going through this process because someone _else_ has **already** identified a problem, but even then ...
-
-[click] We need to understand it, and determine why it happened: the root cause.
-
-The simplest form of root-cause analysis, we just call "the five whys."
-
-[click] Five whys is literally asking "why" five times; each time directing the question at the answer to the previous question.
-
-This way, you dig deeper toward a root cause. (This technique _also_ came out of Toyota, by the way.)
-
-[click] Let's take an example: [click] Our deployments are failing
-- Why? [click]Because the "publish" step is failing to upload
-- Why? [click]Because there was an error authenticating to the service
-- Why? [click]Because the credentials are wrong.
-- Why? [click]Because the password expired.
-- Why? [click]Because we forgot to change the password ahead of time.
-
-Okay, so we've identified the problem, and we think we've identified the root cause. Let's move on to the next step.
-
--->
-
----
-
-# Do
-
-## Design Poka-Yoke Solutions
-
-
----
-
-# Check
-
-## Test and Validate Your Solutions
-
-Use it. Write tests. Verify the mistakes are are impossible -- or obvious.
-
-If your solution works, move on to the next error. Otherwise, try another solution.
-
-<!--
-
-The bottom line is: do what used to cause the problem. See if your solution prevents the problem.
-
-Ideally, you'll have unit tests that reproduce the problem, and you can verify that your solution prevents it.
-
-Worst case, you need to have new users try the tool with the solution in place, and verify they don't have problems.
-
--->
-
----
-
-
-<!-- Three basic principles of defects:
-* Don't create a Defect.
-* Don't accept a D​efect.
-* Don't pass on a Defect. -->

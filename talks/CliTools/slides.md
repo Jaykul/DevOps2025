@@ -492,11 +492,24 @@ A text user interface that can be used to browse your git repo, stage and commit
 
 ---
 
-# V is for VaultCmd
+# V is for viu <br/><div class="text-sm text-primary-lighter">https://github.com/atanunq/viu</div>
 
-Vaultcmd is a Windows-only tool for managing Windows Credential Manager Vaults
+A fast image viewer for the terminal.
 
-<!-- TODO: A better tool -->
+Really I should mention [trackd/sixel](https://github.com/trackd/sixel) but it's a native PowerShell module 😉
+
+### Examples
+
+```powershell
+curl https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjdnc3ljazQyYmlyM2gyMWVpeTE3YTB5M2IxaW5kMWFwOW84djg2dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/v65rDtklV9l6g/giphy.gif
+| viu --once -
+```
+
+````powershell
+Get-ChildItem .\Icons\weather\ -Exclude *.txt
+| Get-Random -Count 5
+| ConvertTo-Sixel -Protocol KittyGraphicsProtocol -Force
+```
 
 ---
 

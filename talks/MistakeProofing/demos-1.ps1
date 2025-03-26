@@ -5,7 +5,7 @@ enum Direction { North; East; South; West }
 [Player]$Player = @{
     Name     = "Player One"
     Position = @{
-        X = 5
+        X = 3
         Y = 5
     }
 }
