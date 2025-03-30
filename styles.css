@@ -100,3 +100,24 @@
     border: 1px solid salmon;
   }
 }
+.inline-icon-btn {
+  --un-text-opacity: 1;
+  /* color: rgb(32 130 166 / var(--un-text-opacity)); */
+  display: inline-block;
+  border-radius: .25rem;
+  padding: .125rem;
+  vertical-align: middle;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 2rem;
+  min-width: 2.25rem;
+  text-align: center;
+  border-width: 2px;
+  --un-border-opacity: 1;
+  --un-border-opacity: .2;
+  border-style: solid;
+}
+
+h1 .inline-icon-btn {
+  border-color: var(--slidev-theme-default-headingColor);
+}

@@ -444,6 +444,7 @@ Ripgrep _recursively_ searches directories for files and then for text matchin a
 rg --tyaml "dev" --iglob "**/*prod/*"
 
 ```
+
 <!--
 RipGrep is fast, and is the go-to tool for searching text when it hasn't ben indexed.
 
@@ -505,10 +506,10 @@ curl https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjdnc3ljazQyYmlyM2gyMWVpe
 | viu --once -
 ```
 
-````powershell
+```powershell
 Get-ChildItem .\Icons\weather\ -Exclude *.txt
 | Get-Random -Count 5
-| ConvertTo-Sixel -Protocol KittyGraphicsProtocol -Force
+| ConvertTo-Sixel
 ```
 
 ---
@@ -554,10 +555,17 @@ yq -i '.spec.template.spec.containers[0].image = "ghcr.io/stefanprodan/podinfo:6
 
 ---
 
-# Z is for zip, zstd and zpaq<div class="text-sm text-primary-lighter"></div>
+# Z is for zoxide<div class="text-sm text-primary-lighter">https://github.com/ajeetdsouza/zoxide</div>
 
-ZPAQ (Matt Mahoney, 2009) https://mattmahoney.net/dc/zpaq.html Open Source (now public domain) archive format, computing intensive, providing very high compression ratio, supersedes previous PAQ format, multiple times [Hutter Prize](http://prize.hutter1.net/) winner.
+A cross-platform, cross-shell, smarter `cd` command. It tracks your most used directories and lets you jump to them with a few keystrokes.
 
-ZSTD (Yann Collet, Przemysław Skibiński, Facebook, 2015) https://github.com/facebook/zstd Open Source (BSD OR GPLv2) pure compression format, Zstd compressor was developed with same scope of Brotli (Google, 2013), also very flexible and being capable of deliver high compression ratio in alternative to impressive (de)compression speed.
+It uses fzf to fuzzy match folders if you want, and supports integration to PowerShell, and importing your "database" from ZLocation (an _awesome_ PowerShell module that basically does the same thing, with better PowerShell support, but obviously without support for running in other shells).
 
-Honorable mention: PeaZip is a cross-platform CLI and GUI wrapper that ships with both of these and more, and has a clever "unzip in new smart folder" feature. https://github.com/peazip/PeaZip/
+### Examples
+
+```powershell
+
+z some/long/path/to/a/directory
+z # will go to ~
+z direc # will return to "some/long/path/to/a/directory"
+```

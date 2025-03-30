@@ -1,18 +1,17 @@
 ---
-title: Mistake Proofing
+title: The Rise of Open Standards in Observability
 info: |
-    # Mistake-Proofing: Poka-Yoke for PowerShell scripts and functions
+    # The Rise of Open Standards in Observability
 
-    Learn more at [HuddledMasses.org/Poka-Yoke](https://HuddledMasses.org/CliTools)
-keywords: ContinuousImprovement,DevOps,PowerShell,PokaYoke,ErrorPrevention,MistakeProofing,UserExperience,Documentation,ErrorHandling,Logging
+    Learn more at [HuddledMasses.org/Open-Telemetry](https://HuddledMasses.org/Open-Telemetry)
+keywords: OpenStandards,Observability,OpenTelemetry,Tracing,Metrics,Logging,Profiling,Telemetry,Instrumentation,DataCollection,Visualization
 ---
 
 <span class="text-8xl text-white" style="font-weight:700;" >
-    Poka<span class="text-blend">Yoke</span> <!-- <logos-git-icon /> --> <!--light-icon icon="git-pull-request"/-->
+    Open <span class="text-blend">Telemetry</span> <!-- <logos-git-icon /> --> <!--light-icon icon="git-pull-request"/-->
 </span>
 <div mb="2rem" text="4xl primary-lighter align-center" style="font-weight:500;" >
-    Mistake-Proofing your PowerShell <br/>
-    scripts and functions
+    The Rise of Open Standards in Observability
 </div>
 <div>
     Joel Bennett

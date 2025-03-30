@@ -12,7 +12,7 @@ defaults:
   leftFooter: /images/cc-by-sa.svg
   rightHeader: /images/PSDOGSummit.png
   layout: default
-src: ./talks/MistakeProofing/cover.md
+src: ./talks/OpenTelemetry/cover.md
 layout: cover
 background: images/E2984F049253590FFACD39F2C701E67920AB36C97BEF97AFD491B673980B991A.jpg
 level: 1
@@ -59,7 +59,7 @@ I'm Joel Bennett, and I'm from upstate New York by way of the grasslands of Guan
 -->
 
 ---
-src: ./talks/MistakeProofing/slides.md
+src: ./talks/OpenTelemetry/slides.md
 ---
 layout: image-right
 image: /images/RateThis.png

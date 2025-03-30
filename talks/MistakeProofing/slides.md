@@ -50,19 +50,16 @@ Of course, we can't prevent all mistakes. We're talking about preventing humans 
 
 ---
 
-# Poke-Yoke
+# Mistakes Should Be
 
-## Mistakes Should Be
+## Obvious at a glance {v-click}
 
-<v-clicks>
+<img v-after src="/images/dashboard-warnings.jpg" alt="Dashboard Lights" class="max-height-120px" />
 
-- Obvious at a glance
-<img src="/images/dashboard-warnings.jpg" alt="Dashboard Lights" class="max-height-120px" />
+## Basically impossible {v-click}
 
-- Outright impossible
-<img src="/images/laptop-ports.jpg" alt="Laptop Ports" class="max-height-120px" />
+<img v-after src="/images/laptop-ports.jpg" alt="Laptop Ports" class="max-height-120px" />
 
-</v-clicks>
 
 <!--
 
@@ -86,11 +83,7 @@ rightClass: col-span-6
 
 ::header::
 
-# Poka-Yoke for PowerShell
-
-## Make Mistakes Impossible
-
-### Falling Into the Pit of Success
+# Falling Into the Pit of Success
 
 Consistency (noun): Reliability, uniformity, or conformity. Logical coherence. A singular way of doing things. {.text-color-yellow}
 
@@ -169,14 +162,12 @@ Let's look at a few more concrete examples:
 
 ---
 
-# Poka-Yoke for PowerShell
-
-## Make Mistakes Impossible
+# Make Mistakes Impossible
 
 <v-switch>
 <template #1>
 
-### Use CmdletBinding to Support Common Parameters
+## Use CmdletBinding to Support Common Parameters
 
 <!-- Highlight lines 4 through 6 -->
 
@@ -193,7 +184,7 @@ function Move-Player {
 </template>
 <template #2>
 
-### Strongly Type Variables and Parameters
+## Strongly Type Variables and Parameters
 
 <!-- Highlight lines 1 and 6 -->
 
@@ -213,7 +204,7 @@ function Move-Player {
 </template>
 <template #3>
 
-### Carefully Choose Parameter Names
+## Carefully Choose Parameter Names
 
 ```powershell {6,7}
 enum Direction { North; East; South; West }
@@ -231,7 +222,7 @@ function Move-Player {
 </template>
 <template #4>
 
-### Validation attributes
+## Use Validation attributes
 
 ```powershell {1,4-10,13}
 [ValidateSet("North", "East", "South", "West")]
@@ -253,7 +244,7 @@ function Move-Player {
 </template>
 <template #5>
 
-### ArgumentCompletion, IValidateSetValuesGenerator, ArgumentCompleter
+## Use ArgumentCompleter
 
 ```powershell {3-13}
 [ValidateSet("North", "East", "South", "West")]
@@ -273,10 +264,12 @@ function Move-Player {
 ...
 ```
 
+See also ... IValidateSetValuesGenerator, ArgumentCompletion
+
 </template>
 <template #6>
 
-### Support -WhatIf and -Confirm
+## Support ShouldProcess for -WhatIf and -Confirm
 
 ```powershell {1,13}
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact="High")]
@@ -314,7 +307,11 @@ Ok, now check out those parameter names. Remember....
 
 [click]Validation attributes can do some of the same things as strongly-typed parameters, but they can be more flexible, and can even take other parameters into account.
 
-[click]ArgumentCompletion is like ValidateSet for completion, but without blocking other values. IValidateSetValuesGenerator is similar, but more dynamic, since it executes code to calculate the possible values. Finally, ArgumentCompleter is the most powerful. It gives us dynamic, context-aware tab completion that is one of the best ways to help users avoid mistakes -- and it lets you consider the AST and the already bound parameters.
+[click]I put a note at the bottom of this slide about ArgumentCompletion, it's like ValidateSet, but for just completion, without blocking other values.
+
+IValidateSetValuesGenerator is similar, but more dynamic, since it executes code to calculate the possible values.
+
+But ArgumentCompleter is the most powerful. It gives us dynamic, context-aware tab completion that is one of the best ways to help users avoid mistakes -- and it lets you consider the AST and the already bound parameters. You can write it inline, as I did in this example, or you can use the `Register-ArgumentCompleter` command to even add completion for commands you didn't write.
 
 [click]When you can, support ShouldProcess so users can run `-WhatIf`, and remember to set ConfirmImpact=High if you do something irreversible.
 
@@ -323,57 +320,22 @@ So far, we've only talked about the user interface to your functions and modules
 
 ---
 
-# Poka-yoke for PowerShell
+# Never Repeat a Mistake
 
-## Make Mistakes Impossible
+## Write Regression Tests {v-click}
 
-<v-switch>
-<template #1-6>
+- Made a mistake? {v-click}
+- Write a test! {v-click}
+- Fix the mistake {v-click}
+- Integrate the test {v-click}
 
-### Write Regression Tests
+## Use PSScriptAnalyzer {v-click}
 
-</template>
-<template #2-6>
+Consistency (noun): Reliability, uniformity, or conformity. Logical coherence. A singular way of doing things. {.text-color-yellow v-click}
 
-- Made a mistake?
+### Consistency facilitates intuition {v-click}
 
-</template>
-<template #3-6>
-
-- Write a test!
-
-</template>
-<template #4-6>
-
-- Fix the mistake
-
-</template>
-<template #5-6>
-
-- Integrate the test
-
-</template>
-<template #6-10>
-
-### Use PSScriptAnalyzer
-
-</template>
-<template #7-10>
-
-Consistency (noun): Reliability, uniformity, or conformity. Logical coherence. A singular way of doing things. {.text-color-yellow}
-
-</template>
-<template #8-10>
-
-#### Consistency facilitates intuition
-
-</template>
-<template #9-10>
-
-#### Consistency increases maintainability
-
-</template>
-</v-switch>
+### Consistency increases maintainability {v-click}
 
 <!--
 ## What would you all say is the best way to **stop** yourself from _repeating_ a mistake?
@@ -395,93 +357,63 @@ Remember our definition from earlier, when we were talking about the pit of succ
 
 [click]PSScriptAnalyzer will help you remember a lot of the rules we talked about from the PowerShell design.
 
-PSScriptAnalyzer is a linter. It checks for obvious errors and common bugs,
-and helps you to identify style and [click]consistency issues.
-You might file that under the category of making mistakes more obvious,
+It's a linter. It checks for obvious errors and common bugs,
+and helps you to identify style and consistency issues.
+[click]You might file that under the category of making mistakes more obvious,
 but I like to think mistakes have not been made until we try to run the code,
 so if you [click]run the linter automatically (in VSCode, and in your CI/CD)
 it can be like a levelling up from a spell-checker to a grammar checker,
-it can _prevent_ mistakes from getting out.
+and can _prevent_ mistakes from getting out.
 
-Remember that you can also add your own rules, if you run into specific bugs or errors you can't detect with regression tests...
+Remember that you can also add your own rules, if you run into specific bugs or errors you can't detect with regression tests.
 
 -->
 
 ---
 layout: image-right
 image: /images/PDCA-Cycle.webp
+clicks: 14
 ---
+
 # Continuous Improvement
 
 <v-switch>
-<template #1-20>
+<template #0-14>
 
-## Plan-Do-Check-Act
-
+<h2>Plan-Do-Check-Act</h2>
 <br/>
 
 </template>
-<template #2-20>
+<template #1>
 
-1. **Plan**: Identify your (possible) problems
-
+<ol>
+<li v-click><strong>Plan</strong>: Identify your (possible) problems</li>
+</ol>
 </template>
-<template #3-20>
-
-### The Five Whys {.pl-8 .mt-0!}
-
+<template #2-10>
+<ol>
+<li><strong>Plan</strong>: Identify your (possible) problems
+    <div v-click="['3', '11']">
+        <h3 v-click="['3', '11']" class="pl-2">The Five Whys <span v-click="['4', '11']" class="text-sm">Ask Why, Five Times.</span></h3>
+        <h4 v-click="['5', '11']">Our deployments are failing</h4>
+        <ol>
+            <li v-click="['6', '11']">Why? Our "publish" step is failing to upload.</li>
+            <li v-click="['7', '11']">Why? Some sort of error authenticating to the service.</li>
+            <li v-click="['8', '11']">Why? It turns out the credentials are wrong.</li>
+            <li v-click="['9', '11']">Why? Well, the password expired.</li>
+            <li v-click="['10', '11']">Why? We forgot to change the password ahead of time.</li>
+        </ol>
+    </div>
+</li>
+</ol>
 </template>
-<template #4-20>
-
-Ask Why, Five Times. {.pl-8 .mt-0!}
-
-</template>
-<template #5-11>
-
-#### Our deployments are failing
-
-</template>
-
-<template #6-11>
-
-  1. Why? Our "publish" step is failing to upload.
-
-</template>
-<template #7-11>
-
-  2. Why? Some sort of error authenticating to the service.
-
-</template>
-<template #8-11>
-
-  3. Why? It turns out the credentials are wrong.
-
-</template>
-<template #9-11>
-
-  4. Why? Well, the password expired.
-
-</template>
-<template #10-11>
-
-  5. Why? Because we forgot to change the password ahead of time.
-
-</template>
-
-<template #11-20>
-
-2. **Do**: Design mistake-proofing solutions
-
-</template>
-<template #12-20>
-
-3. **Check**: Test and validate your solutions
-
-</template>
-<template #13-20>
-
-4. **Act**: Implement and train your team(s)
-
+<template #10-14>
+<ol>
+<li><strong>Plan</strong>: Identify your problems<br/>... and possible solutions <br/>... and how to measure your results.</li>
+<li v-click="['12','15']"><strong>Do</strong>: Implement and test (mistake-proofing) solutions.</li>
+<li v-click="['13','15']"><strong>Check</strong>: Study the results. Compare solutions.</li>
+<li v-click="['14','15']"><strong>Act</strong>: Adjust. Implement the best solution. Document. Train your team(s).</li>
+</ol>
 </template>
 </v-switch>
 
@@ -505,13 +437,15 @@ the process is basically the same.
 
 [click] They call it: Plan, Do, Check, Act (PDCA).
 
-[click] The first step is always to identify the problem.
+Also known as the Shewhart cycle, this is based on the scientific method...
 
-Sometimes, we're only going through this process because somebody _else_ has **already** identified a problem, but even then ...
+[click] The first step is always to identify a problem.
 
-We need to understand it, and determine why it happened: the root cause.
+Frequently we're going through this because somebody _else_ **already** identified a problem, but even then ...
 
-The simplest form of root-cause analysis, we just call
+We need to understand the problem and determine why it happened (or at least come up with a hypothesis for the root cause).
+
+The simplest form of root-cause analysis, we just call...
 
 [click]The five whys.
 [click]It literally consists of asking "why" five times; each time directing the question at the answer to the previous question.
@@ -529,111 +463,117 @@ You say ...
 
 This way, you dig deeper toward a root cause. (This technique _also_ came out of Toyota, by the way.)
 
-Okay, so we've identified the problem, and we think we've identified the root cause. Let's move on to the next step.
+Anyway. [click] Once we've identified a root cause, planning is about establishing objectives, brainstorming solutions, and determining how to measure success.
 
+The simplified, single-player version of planning is:
+1. Determine a root cause
+2. Come up with at least two things you can try to avoid or detect that mistake in the future.
+
+These might be some things we've discussed already, it might be new ScriptAnalyzer rules, additional error-handling code, or even process changes like pair-programming or adding AI Coding Assistants, etc.
+
+[click]Do. Experiment. Design and test your mistake-proofing solutions. Run your unit tests, measure your results.
+[click]Check. Evaluation. Study the results. Compare your solutions, verify that the changes improved results.
+[click]Act. Adjust. Permanently implement the best solution, or determine why your solutions didn't improve the situation. Train your team(s) on the changes, etc.
 -->
 
 ---
 
-# Do
+# Design By Writing ... Help <div class="inline-icon-btn">F1</div>
 
-## Design Poka-Yoke Solutions
+## _Plan:_ Write .EXAMPLEs for Common Scenarios {v-click}
 
----
+## _Do:_ Implement Your Examples {v-click}
 
-# Check
+## _Check:_ Test Your Examples {v-click}
 
-## Test and Validate Your Solutions
-
-Use it. Write tests. Verify the mistakes are are impossible -- or obvious.
-
-If your solution works, move on to the next error. Otherwise, try another solution.
+<h2><em>Act:</em> <span v-click>Document Your Interface <div class="inline-icon-btn">ALT</div> + <div class="inline-icon-btn">H</div></span></h2>
 
 <!--
 
-The bottom line is: do what used to cause the problem. See if your solution prevents the problem.
+Here's my 2 minute summary of how to design tools:
 
-Ideally, you'll have unit tests that reproduce the problem, and you can verify that your solution prevents it.
+[click]Plan. Come up with the scenarios you want to support, and write them down.
 
-Worst case, you need to have new users try the tool with the solution in place, and verify they don't have problems.
+Write them as _examples_ in a comment at the top of your function.
+
+[click]Do. Treat those examples as if they were _tests_, and write the code to make them work
+
+[click]Check. Write regression tests to make sure your examples _always_ work
+
+Honestly, I would love to _generate_ my help examples from tagged Pester tests,
+because I like writing tests first. But we don't need sophisticated tooling for this.
+We write an example, and we write a test named "Example 1" ... and so on.
+
+Whenever anyone touches the documentation --or the "Example" tests-- we ensure during code review that the tests still match the documentation.
+
+### One of the most compelling ways to help tool users succeed is to write _useful_ documentation.
+
+So as part of the *Act*, as I'm finalizing the tool, adjusting and making my implementation permanent,
+
+[click] I document.
+
+- I *describe* the command.
+- I write a short synopsis (to clarify the meaning of the verb and noun).
+- I make sure there's a helpful description in a comment above each parameter.
+- Finally, I add a .LINK to related commands, or the documentation on the website.
+
+That first .LINK that is a URL will be used automatically for `Get-Help -Online`, even if you don't set it in the CmdletBinding attribute.
+
+That's it.
+
+<p class="text-sm text-green italic">NOTE: The PSScriptAnalyer rule does not test anything useful.</p>
 
 -->
-
 ---
 
-# TODO
+# Detecting Mistakes
 
-<!-- Three basic principles of defects:
-* Don't create a Defect.
-* Don't accept a D​efect.
-* Don't pass on a Defect. -->
+## Error Handling & Logging { v-click }
 
----
+<v-click>
 
-# Poka-Yoke for PowerShell
-
-## Make User's Mistakes Obvious
-
-### Handle Known Errors Gracefully
-
-Provide user-actionable information for every expected error that you can't prevent.
-
-### Validate Inputs Up Front, Output Helpful Errors & Suggestions
-
-```powershell {9-11}
+```powershell {8-9|11,12-13}
 function Move-Player {
     [CmdletBinding()]
-    param(
-        [Direction]$Direction,
-        [int]$DistanceInMeters,
-        [switch]$Force
-    )
-
-    if ($Direction -eq "North" -and $Player.Position.Y - $DistanceInMeters -lt 0) {
-        throw "You can't move that far north. The map edge is only $($Position.Y) away.""
+    param()
+    try {
+        $MyInvocation.Instrument()
+        Your-Code-Goes-Here
+    # Special handling for errors you expect
+    } catch [System.IO.FileNotFoundException] {
+        Write-Error "The target game file was not found." -Recommend "Check the path and try again."
+    } catch {
+        Write-ErrorInformation -InformationAction $InformationPreference -InformationVariable global:MyGame_ErrorInformation
+        Write-Error $_ -Recommend ("Please consider reporting this issue at https://github.com/Jaykul/DevOps2025/issues`n" +
+                "  Include as much information as you're comfortable sharing from `$MyGame_ErrorInformation | Set-Clipboard")
+    } finally {
+        $MyInvocation.TraceEnd()
     }
-    ...
+}
 ```
 
-<!--
-
-A big part of what we can do to make mistakes obvious is already built into PowerShell's error handling, with stack traces and error messages always visible by default (unless they happen inside your prompt).
-
-As tool authors, we should take the responsibility to provide user-actionable information for all expected errors, but Poka-Yoke is part of Zero Quality Assurance -- if we know about a mistake, we want to prevent it from happening again.
-
-A
-
-To a certain extent, even the Validation Attributes that we talked about
-earlier don't really _prevent_ mistakes. They _do_ make it obvious when the
-user passes the wrong value, but although the main code in the function does not run,
-from the user's perspective, they're still making a mistake.
-
-There's very little difference for most users between validation attributes and
-and validation code that runs _inside_ your function.
-
-Remember to make the solutions to the mistakes more obvious.
-Instead of "Argument out of bounds" or "Invalid argument" -- indicate the valid range of values.
-
-[click]
-
--->
-
----
-
-# TODO
+</v-click>
 
 <!--
 
-- **Prevent** mistakes from being made:
-  - Documentation (help)
-  - Strongly typed parameters
-  - ArgumentCompleters
-  - Helper commands that produce valid input
-- Make mistakes **obvious** at a glance:
-  - Handle Common Errors (and explain them)
-  - Output Errors (don't suppress unexpected errors)
-- **Learn** from mistakes:
-  - Logging (to a file, or to the event log)
-  - Error Reporting (to a ticketing system, or to a chat channel)
+We've talked about the relationship between the scientific method and the continuous-improvement cycle.
+It also ties in to the pattern I suggested for writing regression tests.
+
+The last thing that I really want to talk about is how do we detect mistakes?
+For continuous improvement, we want to detect all mistakes, and capture as much information as possible.
+
+### [click]In the software world, that means logging.
+
+At a minimum, we want to log every error --every unhandled exception-- that happens in our code.
+Obviously, we want to capture as much information as we can,
+but for modules that we ship to other people, that get's complicated.
+
+[click]Consider doing something like this.
+When we know how to handle the error, we tell the user what to do.
+
+[click]If we don't know how to handle it, we log it,
+or at least we ask the user to include the information in an error report.
+
+<p class="text-sm text-green italic">DEMO: dot-source talks\MistakeProofing\demos-1.ps1</p>
 
 -->
