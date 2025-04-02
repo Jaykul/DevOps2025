@@ -7,6 +7,14 @@ mdc: true
 theme: ./theme
 highlighter: shiki
 lineNumbers: false
+fonts:
+  # basically the text
+  sans: Offside
+  # use with `font-serif` css class from UnoCSS
+  serif: Milonga
+  quote: Carattere
+  # for code blocks, inline code, etc.
+  mono: Source Code Pro
 
 defaults:
   leftFooter: /images/cc-by-sa.svg
@@ -14,7 +22,7 @@ defaults:
   layout: default
 src: ./talks/OpenTelemetry/cover.md
 layout: cover
-background: images/E2984F049253590FFACD39F2C701E67920AB36C97BEF97AFD491B673980B991A.jpg
+background: images/322798.jpg
 level: 1
 ---
 <!-- The content should come from cover.md -->

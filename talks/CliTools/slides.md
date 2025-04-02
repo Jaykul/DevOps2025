@@ -280,7 +280,7 @@ A terminal based UI to interact with your Kubernetes clusters.
 
 <!--
 
-My `k` alias is for `kubectl` and there's no doubt that's one of my highest used CLi tools. In this slot, however, I want to mention a slightly less well known tool. K9s is a terminal dashboard for kubernetes with lots of functionality built in. If you're administering Kubernetes, check it out...
+My `k` alias is for `kubectl` and there's no doubt that's one of my highest used CLi tools. In this slot, however, I want to mention a slightly less well known tool. K9s is a terminal dashboard for kubernetes with lots of functionality built in. If you're administering Kubernetes, check it out. You can easily go from namespace to namespace, view pods, view logs, forward ports, etc.
 
 -->
 
