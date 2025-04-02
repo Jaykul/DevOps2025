@@ -21,7 +21,7 @@ const components = defineComponent({ ThemeLayout })
   p {
     font-size: 1.25rem;
     margin-bottom: 1em;
-    line-height: 1.25em;
+    line-height: 1.25rem;
   }
 }
 </style>

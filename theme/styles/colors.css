@@ -21,8 +21,6 @@ html.dark {
   --slidev-theme-red: #D92D20;
   --slidev-theme-cyan: #55C4CF;
   --slidev-theme-black: #212021;
-  --slidev-theme-brightBlue: #6ECEFF;
-  --slidev-theme-brightPurple: #D29BC6;
   --slidev-theme-yellow: #FBED02;
   --slidev-theme-green: #01A252;
   --slidev-theme-brightRed: #FF6E6D;
@@ -34,6 +32,8 @@ html.dark {
   --slidev-theme-brightYellow: #FFFF85;
   --slidev-theme-brightCyan: #95F2FF;
   --slidev-theme-brightBlack: #493F3F;
+  --slidev-theme-brightBlue: #6ECEFF;
+    --slidev-theme-brightPurple: #D29BC6;
   --slidev-theme-brightGray: #A5A2A2;
   --slidev-theme-darkWhite: #A5A2A2;
   --slidev-theme-gray: #493F3F;
@@ -64,12 +64,12 @@ html:not(.dark) {
   --slidev-theme-brightBlue: #12A8CD;
   --slidev-theme-brightPurple: #C05478;
   --slidev-theme-yellow: #BB6200;
-  --slidev-theme-green: #4A8100;
+  --slidev-theme-green: #4e854c;
   --slidev-theme-cyan: #008E81;
   --slidev-theme-brightRed: #CA7073;
   --slidev-theme-brightWhite: #FFFFFF;
   --slidev-theme-white: #FFFFFF;
-  --slidev-theme-blue: #0073C3;
+  --slidev-theme-blue: #1b587c;
   --slidev-theme-purple: #8F0057;
   --slidev-theme-brightGreen: #81B600;
   --slidev-theme-brightYellow: #CC9800;
@@ -89,15 +89,15 @@ html:not(.dark) {
 
   /* Header shadow */
   --slidev-theme-header-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  --slidev-theme-gradient: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
+  --slidev-theme-gradient: linear-gradient(45deg, var(--slidev-theme-blue) 10%, var(--slidev-theme-green) 90%);
 
   /*  Default */
-  --slidev-theme-default-headingBg: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
+  --slidev-theme-default-headingBg: linear-gradient(45deg, var(--slidev-theme-blue) 10%, var(--slidev-theme-green) 90%);
   --slidev-theme-default-headingColor: var(--slidev-theme-background);
   --slidev-theme-default-background: var(--slidev-theme-background);
 
   /*  Default */
-  --slidev-theme-image-headingBg: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
+  --slidev-theme-image-headingBg: linear-gradient(45deg, var(--slidev-theme-blue) 10%, var(--slidev-theme-green) 90%);
   --slidev-theme-image-headingColor: var(--slidev-theme-background);
   --slidev-theme-image-background: var(--slidev-theme-background);
 
@@ -117,7 +117,7 @@ html:not(.dark) {
   --slidev-theme-section-background: var(--slidev-theme-background);
 
   /*  About me */
-  --slidev-theme-aboutme-background: linear-gradient(45deg, #1b587c 10%, #4e854c 90%);
+  --slidev-theme-aboutme-background: linear-gradient(45deg, var(--slidev-theme-blue) 10%, var(--slidev-theme-green) 90%);
   --slidev-theme-aboutme-color: var(--slidev-theme-background);
   --slidev-theme-aboutme-helloBg: var(--slidev-theme-brightYellow);
   --slidev-theme-aboutme-helloColor: var(--slidev-theme-background);

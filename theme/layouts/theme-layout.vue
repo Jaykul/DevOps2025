@@ -17,6 +17,17 @@ const style = computed(() => handleBackground(props.background, true));
 </script>
 
 <template>
+    <!-- <div class="absolute inset-0 z-1">
+      <transition appear name="section">
+        <img
+          src="../assets/bg-quote.svg"
+          alt=""
+          v-if="$slidev.nav.currentLayout === 'quote'"
+          class="opacity-80"
+        />
+      </transition>
+    </div> -->
+
   <div class="slidev-layout pa-0 text-[1.1rem]" :class="(style.background || style.backgroundImage) ? layoutClass : 'no-background ' + layoutClass"
       :style="style">
     <theme-header :leftHeader="leftHeader" :rightHeader="rightHeader" />
@@ -28,7 +39,7 @@ const style = computed(() => handleBackground(props.background, true));
   </div>
 </template>
 
-<style>
+<style lang="pcss">
 .slidev-layout {
   background: var(--slidev-theme-default-background);
 
