@@ -264,7 +264,7 @@ function Move-Player {
 ...
 ```
 
-See also ... IValidateSetValuesGenerator, ArgumentCompletion
+See also ... IValidateSetValuesGenerator, ArgumentCompletions
 
 </template>
 <template #6>
@@ -307,7 +307,7 @@ Ok, now check out those parameter names. Remember....
 
 [click]Validation attributes can do some of the same things as strongly-typed parameters, but they can be more flexible, and can even take other parameters into account.
 
-[click]I put a note at the bottom of this slide about ArgumentCompletion, it's like ValidateSet, but for just completion, without blocking other values.
+[click]I put a note at the bottom of this slide about ArgumentCompletions, it's like ValidateSet, but for just completion, without blocking other values.
 
 IValidateSetValuesGenerator is similar, but more dynamic, since it executes code to calculate the possible values.
 

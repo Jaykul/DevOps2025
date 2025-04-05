@@ -98,70 +98,34 @@ when something goes wrong, I can ask a question about my system and get a sense 
 
 ---
 
-# Telemetry Signals
+# A Brief History
 
-Signals are system outputs that _describe_ the underlying activity of the system.
-
-<v-click>
-
-## Logs
-
-A time-stamped text records of discrete events. { .pl-4rem }
-
-</v-click>
-<v-click>
-
-## Traces
-
-The path of an event through a system. { .pl-4rem }
-
-</v-click>
-<v-click>
-
-## Metrics
-
-Quantitative measurements at specific points in time. { .pl-4rem }
-
-</v-click>
-
-<!--
-The data that your system needs to generate in order to be observable are called "telemetry signals", or just "signals" (or just "telemetry"). These are system outputs that _describe_ the underlying activity of the system. They can include **anything** that you want to measure or trace.
-
-In current practice, there are three types of telemetry signals that are considered the "pillars" of observability:
-
-- [click]Logs are time-stamped text records of discrete events. In the modern era, they are usually structured, and frequently they contain contextual information about the event or the environment in which it occurred. These are the oldest, most common, and most widely-used type of telemetry signal.
-- [click]Metrics are quantitative measurements of some element of a system at a specific point in time.
-- [click]Traces are about following the path of a request or event through a system. They give us the "big picture" of what happens when a request is made to an application.
-
--->
-
----
-
-# A Brief History of Telemetry
-
-```mermaid {theme: 'dark'}
+```mermaid {theme: 'dark', themeVariables: { 'cScale0': '#01A0E4', 'cScaleLabel0': '#000', 'cScale1': '#00A8B5', 'cScaleLabel1': '#000', 'cScale2': '#01A252', 'cScaleLabel2': '#000', cScale3: '#85C53D', cScaleLabel3: '#000', cScale4: '#EAE230', cScaleLabel4: '#000', cScale5: '#FCC03B', cScaleLabel5: '#000'}}
 timeline
     1999 : RRDTool (Tobias Oetiker)
     2003 : Splunk
     2008 : Graphite (Orbitz)
-    2010 : ElasticSearch
+         : NewRelic
+    2009 : ElasticSearch
+    2010 : DataDog
          : Dapper Paper (Google)
 ```
+
 <!--
 
 Most of the folks talking about Telemetry and Metrics today tend to discount the tools that came _before_ "distributed tracing" like RRDTool, Splunk, Graphite, the ELK stack (Elastic/Logstash/Kibana).
 
 In fact, I couldn't find articles discussing the history of _telemetry_ or _observability_ that went back any further than Google's Dapper paper in 2010....
 
-In the early days of telemetry, all our data was in silos. We had logs, but they lived on the system where the software ran. If we had metrics, they were probably in an app-specific system, or maybe in RRDTool on each server. Traces stopped at the boundaries between services and applications.
+In the early days (just a couple decades ago), all our data was in silos. We had logs, but they lived on the system where the software ran. We used them for reactive troubleshooting (after something breaks, we use the logs to figure out why). When people started collecting metrics, they were usually in an app-specific system, or maybe in a system like RRDTool _on each server_. Traces stopped at the boundaries between services and applications.
 
 -->
 
 ---
 
-# A Brief History of Telemetry
+# A Brief History
 
-```mermaid {theme: 'dark'}
+```mermaid {theme: 'dark', themeVariables: { 'cScale0': '#01A0E4', 'cScaleLabel0': '#000', 'cScale1': '#00A8B5', 'cScaleLabel1': '#000', 'cScale2': '#01A252', 'cScaleLabel2': '#000', cScale3: '#85C53D', cScaleLabel3: '#000', cScale4: '#EAE230', cScaleLabel4: '#000', cScale5: '#FCC03B', cScaleLabel5: '#000'}}
 timeline
     2012 : Zipkin (Twitter)
     2014 : Kubernetes (Google)
@@ -186,10 +150,71 @@ That merger was a pivotal moment for observability. The commercial and open sour
 -->
 
 ---
+layout: two-cols
+rightClass: col-span-4
+leftClass: col-span-8
+---
+
+::header::
+# Telemetry Signals
+
+::left::
+
+In general, we describe telemetry as a set of system outputs called _**signals**_, which require a mechanism for context discovery and propagation.
+
+::right::
+
+```mermaid {theme: 'neutral', color: 'white'}
+block-beta
+    columns 1
+        block:Signals
+            Logging
+            style Logging fill:#01A0E4,stroke:#000
+
+            Tracing
+            style Tracing fill:#01A252,stroke:#000
+
+            Metrics
+            style Metrics fill:#EAE230,stroke:#000
+
+            %%Baggage
+            %%style Baggage fill:#EAE230,stroke:#000
+        end
+
+        block:Shared
+            Context
+            style Context fill:#FCC03B,stroke:#000
+
+            Propagation
+            style Propagation fill:#FCC03B,stroke:#000
+        end
+        style Shared fill:transparent,stroke:transparent
+```
+
+<!--
+The data that your system needs to generate in order to be observable are called "telemetry signals", or just "signals" (or just "telemetry"). These are system outputs that _describe_ the underlying activity of the system. They can include **anything** that you want to measure or trace.
+
+In current practice, there are three types of telemetry signals that are considered the "pillars" of observability:
+
+- Logs are time-stamped text records of discrete events. In the modern era, they are usually structured, and frequently they contain contextual information about the event or the environment in which it occurred. These are the oldest, most common, and most widely-used type of telemetry signal.
+- Metrics are quantitative measurements of some element of a system at a specific point in time.
+- Traces are about following the path of a request or event through a system. They give us the "big picture" of what happens when a request is made to an application.
+
+They are designed to work together --  so that you can correlate logs, metrics, and traces together.
+
+-->
+
+---
+layout: two-cols
+---
+
+::header::
 
 # Telemetry Layers
 
-## Instrumentation is a Factorial Effort
+::left::
+
+Each signal works as a cross-cutting concern, involving each part of the system.
 
 <table>
 <thead>
@@ -202,20 +227,26 @@ That merger was a pivotal moment for observability. The commercial and open sour
   </thead>
   <tbody>
   <tr>
-    <td>APIs</td><td colspan="3">For Each Metric Type</td>
+    <td>Frameworks</td><td colspan="3">APIs for each Metric Type</td>
     </tr>
   <tr>
-    <td>Libraries</td><td colspan="3">For Each Language and Framework</td>
+    <td>Applications</td><td colspan="3">Libraries for each Language</td>
     </tr>
   <tr>
-    <td>Collectors</td><td colspan="3">Sidecars and Agents for each Provider</td>
+    <td>Collectors</td><td colspan="3">Sidecars and Agents Galore</td>
     </tr>
 </tbody>
 </table>
 
+::right::
+
+![Cross-Cutting Concerns](/images/otel-cross-cutting.png)
+
 <!--
 
-And this ... is the reason why.
+Although each signal can be used independently, they are cross-cutting concerns, which require implementation throughout the stack, in each langauge and framework, in each application, in agents and servers that collect the data, and clients which may dsplay it.
+
+Ultimately, this is the reason why we needed standards.
 
 Without a standard, every language and framework had it's own way of implementing logging and metrics, and they all had to implement exporters and APIs for multiple vendors. Any new APM vendor that wanted to enter the market had to write their own tooling, their own SDKs, their own APIs, for each and every programming language and operating system they wanted to market to.
 
@@ -230,6 +261,30 @@ Of course, on the other hand, customers were frustrated and "locked in" to the v
 As a result, the Open Telemetry project quickly became the second largest CNCF (Cloud Native Computing Foundation) project, second only to Kubernetes.
 
 -->
+---
+layout: two-cols
+---
+
+::header::
+# OpenTelemetry Architecture
+
+::left::
+
+Specifications, Protocols, Standards and conventions.
+
+But also APIs, SDKs, zero-code instrumentation agents, collectors, forwarders, and more.
+
+::right::
+
+![Separation Of Concerns](/images/otel-implementation.png)
+
+<!--
+
+So in the end, OpenTelemetry is not **just** standards and specifications and semantic conventions, but also APIs and SDKs, agents, collectors and forwarders. All of the APM vendors have embraced "observability" as the new marketing buzzword, and have involved themselves to various degrees in the Open Telemetry project, to support the development of those specifications and standards, and to ensure that their products will be among the best at collecting and visualizing the data -- because ultimately, that's where the competition continues.
+
+There are SDKs for the parts that can be set up and managed independently, exposing constants, helpers and interfaces for applications to use for instrumentation.
+
+-->
 
 ---
 
@@ -237,24 +292,155 @@ As a result, the Open Telemetry project quickly became the second largest CNCF (
 
 [Open Telemetry Protocol (OTLP)](https://github.com/open-telemetry/opentelemetry-proto)
 
-<v-clicks depth="2">
-
-A gRPC protocol for encoding telemetry data and sending it from a client (the source of     telemetry data) to a server, with special attention to "agents" and "forwarders" (which are both client and server).
+A gRPC protocol for encoding telemetry data and sending it from a client (any source of telemetry data) to a server, with special attention to "agents" and "forwarders" (which are both client and server).
 
 - Logs
 - Metrics
 - Traces
 - Profiling (in development)
 
-</v-clicks>
-
 <!--
-Both OpenTracing and OpenCensus were open source projects that were trying to create _standards_ and _specifications_ that would allow for interoperability. Their merger meant there was one standard, one specification. Ironically, that standard specifically calls out problems with the OpenCensus protocol (like lack of delivery guarantees).
 
-The Open Telemetry Protocol (OTLP) uses Protocol Buffers and binary serialization for encoding telemetry data, and sends it over gRPC. It's conflicting goals are to be highly reliable and make sure failures are visible, to have high throughput, low CPU usage and minimal pressure on memory, all while supporting the ability of forwarders to efficiently modify data before forwarding it.
+So let's talk about those standards and specs for a minute.
+
+OpenTracing and OpenCensus were both open source projects trying to create _standards_ and _specifications_ for interoperability. Their merger basically sealed the deal, and convinced everyone that we could agree on a single standard... The new standard specifically calls out problems with the old ones (like lack of delivery guarantees in OpenCensus), and took some time to iron out:
+
+It's (conflicting) goals are: to be highly reliable and make sure failures are visible, to have high throughput, low CPU usage and minimal pressure on memory, all while supporting the ability of forwarders to efficiently modify data before forwarding it.
 
 The OTLP protocol 1.0.0 had support for traces, metrics, and logs.
 
 Profiles were added as "development" in 1.3.0 (last year).
 
+So what is in that protocol?
+
 -->
+---
+layout: two-cols
+rightClass: col-span-4
+leftClass: col-span-8
+---
+
+::header::
+
+# What is in the Protocol?
+
+::left::
+
+## How [deep](https://opentelemetry.io/docs/specs/otlp/) shall we go?
+
+<v-clicks>
+
+[HTTTP/2](https://http2.github.io/) changed the "on the wire" representation of HTTP for performance: a _binary encoding_ of HTTP supports multiplexing over a single connection, making it faster and more efficient.
+
+[gRPC](https://grpc.io/) is a general Remote Procedure Call framework built on HTTP/2 and Protocol Buffers. It features bi-directional streaming, load-balancing, service mesh, authentication...
+
+[OTLP](https://opentelemetry.io/docs/specs/otlp/) is _therefore_ a high-throughput binary request/response [protocol](https://github.com/open-telemetry/opentelemetry-proto/tree/v1.5.0/opentelemetry/proto), supporting interleaved, concurrent requests and responses.
+
+</v-clicks>
+
+::right::
+
+<v-after>
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Server
+    Client->>Server: Export1
+    Client->>Server: Export2
+    Client->>Server: Export3
+    Server-->>Client: Success1
+    Server-->>Client: PartialSuccess2
+    Server-->>Client: Success3
+```
+
+</v-after>
+
+<!--
+
+OTLP is built on gRPC, which is built on HTTP/2 which is ... where I'm going to draw the line. Everyone's heard of HTTP, but do you know what's _different_ about HTTP/2?
+
+[click] For our purposes today, all you really need to know about HTTP/2 is that it's a _binary_ encoding of the HTTP protocol, focused on performance. The binary encoding enabled new approaches to data delivery, including multiplexing or interleaving _simultaneous streams_ of information over a single connection. This way, even with a single connection we don't have to wait for one request to finish before sending another.
+
+[click]The gRPC framework is an open-source general Remote Procedure Call framework built on HTTP/2 and Protocol Buffers.
+
+in 2013 Google decided to open source a protocol which they had been using internally, and after three years of re-writing, they initially released gRPC 1.0.0 in 2016, and donated it to the CNCF in 2017.
+
+From the begining it's been about bi-directional streaming with retries and timeouts over HTTP/2 (actually, SPDY when they first started), and gRPC now includes features such as client-side load-balancing, proxyless service mesh, tracing, authentication and authorization, interceptors, and more across 11 programming languages. It is a highly efficient, widely used framework for microservices and other distributed systems.
+
+Incidentally, when I say Open Source: this framework is actually licensed under Apache 2.0, BSD, and MPL (Mozilla Public License).
+
+[click]OTLP obviously benefits from everything it's based on. It's a request/response protocol that supports interleaved, concurrent requests for high throughput. Each request gets a response indicating success or failure, or even partial success (if, for example, some of the data was rejected as duplicate). This allows for high throughput _and_ low latency in the delivery of telemetry data. The protocol specifies when exports can be retried, and servers can signal backpressure (they return "unavailable") and signal retry delays. **All** of this basically comes from gRPC and HTTP/2.
+
+Now, we can get deeper into the details of the payloads, but if you want to do that, I'm literally going to dive into the protocol specification on GitHub... otherwise, we can move on to some demos of running systems and code.
+
+-->
+
+---
+
+# Semantic Conventions
+
+A [common set](https://opentelemetry.io/docs/specs/semconv/) of attributes which provide meaning to data
+
+### **Attribute**: a standardized name and data type
+
+### **Metric**: a standardized name, type, and unit of measure
+
+For [Resources](https://opentelemetry.io/docs/specs/semconv/resource/), [Events](https://opentelemetry.io/docs/specs/semconv/general/events/), [Metrics](https://opentelemetry.io/docs/specs/semconv/general/metrics/), [Logs](https://opentelemetry.io/docs/specs/semconv/general/logs/), [Trace Spans](https://opentelemetry.io/docs/specs/semconv/general/trace/), performance [Profiles](https://opentelemetry.io/docs/specs/semconv/general/profiles/), etc.
+
+<!--
+
+The Open Telemetry project starts with the OTLP protocol, the API specifications (and implementations in SDKs), but it also includes _Semantic Conventions_.
+
+Semantic Conventions are a common set of (semantic) attributes which provide meaning to the data in our signals. Think of them as the standard dimensions of common signals, they follow a naming scheme that can be standardized across your codebase and has been followed in all of the libraries and platforms and SDKs from OpenTelemetry. This is key to correlation and consumption of data.
+
+An Attribute is a standardized name and data type, which can be used to annotate signals.
+
+A Metric is a standardized measurement name, type, and unit of measure, plus a set of attributes that are required or recommended to describe the metric.
+
+There are defined conventions for Resources (like "Service" and "Environment" and "Compute Unit" and "Version"), and Events, as well as for Metrics, Log Attributes, Trace Span Attributes, and even Profiling data. In general, the goal is to standardize on a common set of attributes and dimensions for each type of signal, so that you can understand the data even if you've never seen the system before.
+-->
+
+---
+
+# A few examples
+
+- [Http Metrics](https://opentelemetry.io/docs/specs/semconv/http/http-metrics/#metric-httpserverrequestduration)
+- [CICD & VCS Metrics](https://opentelemetry.io/docs/specs/semconv/cicd/cicd-metrics/)
+- [GenAI Metrics](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-metrics/)
+- [GraphQL Spans](https://opentelemetry.io/docs/specs/semconv/graphql/graphql-spans/)
+- [Code Attributes](https://opentelemetry.io/docs/specs/semconv/code/)
+- [Azure Events](https://opentelemetry.io/docs/specs/semconv/azure/events/)
+- [Messaging Spans](https://opentelemetry.io/docs/specs/semconv/messaging/messaging-spans/)
+
+<!--
+
+Take for instance the HTTP server metrics. The `http.server.request.duration` metric is a histogram measured in seconds. It's defined by convention as having several _required_ attributes: http.request.method, url.scheme, the http.route (if known), and the network.protocol.name, plus a few aditional attributes when there's an error (like the error.type and the http.response.status_code), some recommended properties (like the protocol version), and some additional "opt-in" attributes: the server address and port, and the user type.
+
+There are just a few other http metrics defined:
+
+- http.server.request.duration (_histogram_, seconds) (already talked about)
+- http.server.active_requests (_counter_, count)
+- http.server.request.body.size (_histogram_, bytes)
+- http.server.response.body.size (_histogram_, bytes)
+
+But there are so many more metrics here that you might be interested in. How about CICD or Version Control Metrics? Or Code attributes for annotating logs? Did you know there's a growing set of standard metrics for measuring the performance of Generative AI client systems?
+
+- cicd.pipeline.run duration (_histogram_, seconds)
+- cicd.pipeline.run.active (_counter_, runs)
+- cicd.worker.count (_counter_, workers)
+- cicd.pipeline.run.errors (_counter_, errors)
+- cicd.system.errors (_counter_, errors)
+
+-->
+
+---
+layout: image-right
+image: /images/otel-demo-architecture.png
+equal: true
+---
+# Let's see it
+
+There is an [OpenTelemetry Demo](https://opentelemetry.io/ecosystem/demo/) on [GitHub](https://github.com/open-telemetry/opentelemetry-demo) with great [docs](https://opentelemetry.io/docs/demo/), which you can run locally to see how OpenTelemetry works in practice.
+
+Right now, I'm running it on [otel.poshcode.com](https://otel.poshcode.com) and you can even access [grafana](https://otel.poshcode.com/grafana) and [Jaeger](https://otel.poshcode.com/jaeger/ui) to see the data. Please don't mess with the feature flags while I'm running the demo 🥹
