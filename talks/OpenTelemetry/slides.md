@@ -444,3 +444,20 @@ equal: true
 There is an [OpenTelemetry Demo](https://opentelemetry.io/ecosystem/demo/) on [GitHub](https://github.com/open-telemetry/opentelemetry-demo) with great [docs](https://opentelemetry.io/docs/demo/), which you can run locally to see how OpenTelemetry works in practice.
 
 Right now, I'm running it on [otel.poshcode.com](https://otel.poshcode.com) and you can even access [grafana](https://otel.poshcode.com/grafana) and [Jaeger](https://otel.poshcode.com/jaeger/ui) to see the data. Please don't mess with the feature flags while I'm running the demo 🥹
+
+<!--
+
+The leaky recommender
+
+C:\Users\joelbennett\Projects\opentelemetry-demo\src\recommendation\recommendation_server.py:78
+
+https://gitkraken.dev/link/dnNjb2RlOi8vZWFtb2Rpby5naXRsZW5zL2xpbmsvci83NWJmODRmYTc3M2NmNzA2NmVjNDBjY2JlNDAwZjVkNzM0YTJiNGI5L2Yvc3JjL3JlY29tbWVuZGF0aW9uL3JlY29tbWVuZGF0aW9uX3NlcnZlci5weT91cmw9Z2l0JTQwZ2l0aHViLmNvbSUzQW9wZW4tdGVsZW1ldHJ5JTJGb3BlbnRlbGVtZXRyeS1kZW1vLmdpdCZsaW5lcz03OA%3D%3D?origin=gitlens
+
+
+The missing telescope.
+
+C:\Users\joelbennett\Projects\opentelemetry-demo\src\product-catalog\main.go:337
+
+https://gitkraken.dev/link/dnNjb2RlOi8vZWFtb2Rpby5naXRsZW5zL2xpbmsvci83NWJmODRmYTc3M2NmNzA2NmVjNDBjY2JlNDAwZjVkNzM0YTJiNGI5L2Yvc3JjL3Byb2R1Y3QtY2F0YWxvZy9tYWluLmdvP3VybD1naXQlNDBnaXRodWIuY29tJTNBb3Blbi10ZWxlbWV0cnklMkZvcGVudGVsZW1ldHJ5LWRlbW8uZ2l0JmxpbmVzPTMzNw%3D%3D?origin=gitlens
+
+-->

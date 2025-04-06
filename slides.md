@@ -20,7 +20,7 @@ defaults:
   leftFooter: /images/cc-by-sa.svg
   rightHeader: /images/PSDOGSummit.png
   layout: default
-src: ./talks/OpenTelemetry/cover.md
+src: ./talks/CliTools/cover.md
 layout: cover
 background: images/322798.jpg
 level: 1
@@ -67,7 +67,7 @@ I'm Joel Bennett, and I'm from upstate New York by way of the grasslands of Guan
 -->
 
 ---
-src: ./talks/OpenTelemetry/slides.md
+src: ./talks/CliTools/slides.md
 ---
 layout: image-right
 image: /images/RateThis.png

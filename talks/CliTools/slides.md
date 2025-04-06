@@ -1,10 +1,13 @@
-# A is for age<div class="text-sm text-primary-lighter">https://github.com/FiloSottile/age</div>
+# A is for age<span block  text="sm primary-lighter">https://github.com/FiloSottile/age</span>
 
 A simple, modern and secure encryption tool with small keys, no config options, and pipeline composability. (See also [rage](https://github.com/str4d/rage) and [typage](https://github.com/FiloSottile/typage)).
 
 ### Tips
 
 Age also supports using SSH Keys for encryption.
+
+
+### Honorable mention to Ansible and Az
 
 <!--
 ### Usage
@@ -28,12 +31,14 @@ age --decrypt --identity "key.txt" --output "data.tar.gz" data.tar.gz.age
 <!--
 Also a Go library, with Rust and Typescript implementations (yes, typage works in the browser).
 
-Honorable mention to [az](https://github.com/Azure/azure-cli), which is basically a python CLI version of all the Az modules.
+Honorable mention to [Ansible](which has usable automation for service accounts -- and can change their passwords, and manage GMSAs, unlike certain other configuration tools...
+
+Honorable mention also to [az](https://github.com/Azure/azure-cli), which is basically a python CLI version of the Az PowerShell modules, in only 13k files and 300MB. Which may sound like a lot, but the Az modules are 7k fies and 1.7GB...
 -->
 
 ---
 
-# B is for bat<div class="text-sm text-primary-lighter">https://github.com/sharkdp/bat</div>
+# B is for bat<span block text="sm primary-lighter">https://github.com/sharkdp/bat</span>
 
 A `cat` clone with syntax highlighting and git integration. It shows modifications with respect to the git index, can syntax highlight anything from actionscript to zig (including powershell), can show non-printable characters, can display multiple files at once, read pipeline input, pages by default, etc.
 
@@ -53,7 +58,7 @@ Honorable mentions:
 -->
 ---
 
-# C is for chezmoi<div class="text-sm text-primary-lighter">https://github.com/twpayne/chezmoi</div>
+# C is for chezmoi<span block text="sm primary-lighter">https://github.com/twpayne/chezmoi</span>
 
 Chezmoi manages personal configuration files ("dotfiles" like `~/.gitconfig`) and profile scripts across machines. I even use it to manage my WezTerm and Windows Terminal config, and some VSCode settings.
 
@@ -105,7 +110,7 @@ The man page for curl is over 80 pages (printed), but it's worth learning the ba
 
 ---
 
-# D is for dotnet new<div class="text-sm text-primary-lighter">https://github.com/dotnet/templating</div>
+# D is for dotnet new<span block text="sm primary-lighter">https://github.com/dotnet/templating</span>
 
 By far the easiest way to create templates for projects.
 
@@ -136,7 +141,7 @@ Honorable mention to delta which is an amazing diff tool, and doggo, which is on
 
 ---
 
-# E is for earthly<div class="text-sm text-primary-lighter">https://github.com/earthly/earthly</div>
+# E is for earthly<span block text="sm primary-lighter">https://github.com/earthly/earthly</span>
 
 Earthfile is like a cross between make files and dockerfiles. It can build anything, and the builds are fast, cached, and consistent, running the same whether on a developer laptop or GitHub CI/CD.
 
@@ -153,7 +158,6 @@ build:
     FROM +deps
     COPY src src
     RUN dotnet publish --no-restore src/*.csproj -o publish
-
     SAVE ARTIFACT publish AS LOCAL publish
 ```
 
@@ -163,36 +167,46 @@ TODO: This would be a great live demo
 
 ---
 
-# F is for fzf<div class="text-sm text-primary-lighter">https://github.com/junegunn/fzf</div>
+# F is for fzf<span block text="sm primary-lighter">https://github.com/junegunn/fzf</span>
 
-Think of fzf as a faster, more powerful, text-only version of `Out-ConsoleGridView`...
+Think of fzf as a faster, more powerful, text-only version of `Out-ConsoleGridView`.
+
+Also a way nicer Ctrl+r (thanks [kelleyma49/PSFzf](https://github.com/kelleyma49/PSFzf) _or_ [domsleee/Posh-Fzf](https://github.com/domsleee/posh-fzf))
 
 <img src="https://junegunn.github.io/fzf/images/fzf.gif" width="80%" />
-
 
 <!--
 Make sure to check out [kelleyma49/PSFzf](https://github.com/kelleyma49/PSFzf), a PowerShell wrapper that will even help you integrate fzf in your PSReadLine, and [beauwilliams/awesome-fzf](https://github.com/beauwilliams/awesome-fzf) a collection of ideas for using fzf (but using bash syntax), and [d-kuro/kubectl-fuzzy](https://github.com/d-kuro/kubectl-fuzzy) which wraps a bunch of kubectl commands in fzf
 
-TODO: I need a much better demo of fzf (e.g. to pick a file, with file preview on the side)
+TODO: make a better gif
+
+Fzf is so good, there are two PowerShell modules to make it easier to use, and provide helper functions and PSReadLine key bindings for it!
 
 Honorable mention to fd, which is a faster find, and fluxCD which we use to manage our Kubernetes clusteers.
 -->
 
 ---
 
-# G is for Git<div class="text-sm text-primary-lighter">https://git-scm.com/</div>
+# G is for Git<span block text="sm primary-lighter">https://git-scm.com/</span>
 
-This one is another no-brainer that I really can't ignore. If you're not tracking your change history in git, what are you using?
-
-# TODO: What's the hottest git example?
+This one is a no-brainer. Please folks:
+1. Put your code in source control
+2. Put your infrastructure in code
 
 ## Honorable mention to `gh`, the GitHub CLI
 
 Create or clone repositories, manage pull requests, and even close issues from your terminal.
 
+<!--
+# TODO: What's the hottest git example?
+
+I really wish I believed that everyone here keeps all their scripts in git, but I've been around too  that I really can't ignore. If you're not tracking your change history in git, what are you using?
+
+
+-->
 ---
 
-# H is for httpie<div class="text-sm text-primary-lighter">https://github.com/httpie/cli</div>
+# H is for httpie<span block text="sm primary-lighter">https://github.com/httpie/cli</span>
 
 A colorful modern command-line HTTP client with a more intuitive interface ([docs](https://httpie.io/docs/cli)). Designed for testing & debugging APIs, servers & services.
 
@@ -215,7 +229,7 @@ A simple hex viewer that uses a colored output to distinguish different categori
 
 <!--
 
-You can `choco install httpie` or use pip or brew or apt/yum, etc.
+You can `choco install httpie` or `winget install --id=HTTPie.HTTPie -e` use pip or brew or apt/yum, etc.
 
 <img src="https://camo.githubusercontent.com/d3fea7abd0c9cb12b9627f4408a0559e4e081d4a786db3d7f6bdb9984ca61ada/68747470733a2f2f692e696d6775722e636f6d2f447037576e637a2e706e67" width="80%" />
 
@@ -223,7 +237,7 @@ You can `choco install httpie` or use pip or brew or apt/yum, etc.
 
 ---
 
-# I is for ImageMagick<div class="text-sm text-primary-lighter">https://imagemagick.org/</div>
+# I is for ImageMagick<span block text="sm primary-lighter">https://imagemagick.org/</span>
 
 So many possibilities for scripting images, from resizing & converting to complex text annotation. Sixels!
 
@@ -238,6 +252,8 @@ magick ./public/images/RateThis.png sixel:-
 ```
 
 <!--
+Another one you need to get from choco or winget
+
 1..5 | % {
 convert -size 50x80 xc: +noise Random -write mpr:noise +delete `
         mpr:noise -extent 100x80 -compose copy `
@@ -254,7 +270,7 @@ convert -size 50x80 xc: +noise Random -write mpr:noise +delete `
 
 ---
 
-# J is for jq<div class="text-sm text-primary-lighter">https://github.com/jqlang/jq</div>
+# J is for jq<span block text="sm primary-lighter">https://github.com/jqlang/jq</span>
 
 The json query tool lets you slice and filter, map and transform structured data. You don't _need_ jq in PowerShell, but having it can save you time when people's examples use it, and if nothing else, it's a prettier way to display json.
 
@@ -272,7 +288,7 @@ curl 'https://api.github.com/repos/powershell/powershell/commits?per_page=5'
 
 ---
 
-# K is for ~~kubectl~~ k9s<div class="text-sm text-primary-lighter">https://github.com/derailed/k9s</div>
+# K is for ~~kubectl~~ k9s<span block text="sm primary-lighter">https://github.com/derailed/k9s</span>
 
 A terminal based UI to interact with your Kubernetes clusters.
 
@@ -286,17 +302,15 @@ My `k` alias is for `kubectl` and there's no doubt that's one of my highest used
 
 ---
 
-# L is for lnav<div class="text-sm text-primary-lighter">https://github.com/tstack/lnav</div>
+# L is for lnav<span text="sm primary-lighter">https://github.com/tstack/lnav</span>
 
-Logfile Navigator. Try it! There's a 'tutorial1' and a 'playground' you can use to learn what it can do:
+Logfile Navigator. A TUI with built-in understanding of syslog, apache, strace, and more, but **very good** with any log files that have time stamps. Supports _navigation by time_, markdown annotations, searching, etc. Try it! There's a 'tutorial1' and a 'playground' you can use to learn what it can do:
 
 ```bash
 ssh tutorial1@demo.lnav.org
 ```
 
-A TUI with built-in support for syslog, apache, strace, and tcsh history, but very good with any log files that have time stamps. Supports searching, navigation by time, markdown annotations, etc.
-
-**Note:** Windows builds are currently only available on the [ci-build output](https://github.com/tstack/lnav/actions/workflows/c-cpp.yml).
+⚠ **Note:** Windows builds currently only available on [ci-build output](https://github.com/tstack/lnav/actions/workflows/c-cpp.yml), but just unzip and run.
 
 | Logs | Markdown |
 | ---- | ---- |
@@ -313,7 +327,7 @@ Hypothetically, you could use this as a pager, but it's a bit of a heavy tool fo
 
 ---
 
-# M is for Miller<div class="text-sm text-primary-lighter">https://github.com/johnkerl/miller</div>
+# M is for Miller<span block text="sm primary-lighter">https://github.com/johnkerl/miller</span>
 
 Miller is for stream-processing tabular data. It has a simple syntax for filtering, transforming, and aggregating data. It even handles a few formats that PowerShell does not, like pretty-printed tabular data and delimited key-value pair data, and can read compressed files.
 
@@ -343,13 +357,13 @@ helm list -A | ConvertFrom-Csv -Delimiter `t | ft NAME*, REVISION*, UPDATED*, *V
 
 ---
 
-# N is for nmap<div class="text-sm text-primary-lighter">https://nmap.org/</div>
+# N is for nmap<span block text="sm primary-lighter">https://nmap.org/</span>
 
 <!-- TODO: I don't really even know how to use nmap -->
 
 ---
 
-# O is for Ov<div class="text-sm text-primary-lighter">https://github.com/noborus/ov</div>
+# O is for Ov<span block text="sm primary-lighter">https://github.com/noborus/ov</span>
 
 ## Let's talk about pagers
 
@@ -389,7 +403,7 @@ Right now my favorite pager is `ov` because it gives me everything I used in les
 
 ---
 
-# P is for Pandocc<div class="text-sm text-primary-lighter">https://github.com/jgm/pandoc</div>
+# P is for Pandoc<span block text="sm primary-lighter">https://github.com/jgm/pandoc</span>
 
 If you need to convert text files from one markup format into another, pandoc is your swiss-army knife.
 
@@ -414,7 +428,7 @@ I picked Pandoc as one I thought less people would be familiar with, to add valu
 -->
 ---
 
-# Q is for qrc<div class="text-sm text-primary-lighter">https://github.com/fumiyas/qrc</div>
+# Q is for qrc<span block text="sm primary-lighter">https://github.com/fumiyas/qrc</span>
 
 QRC is a helpful little command-line tool for generating QR codes _inside_ your terminal.
 
@@ -434,7 +448,7 @@ This one's a little helper that generates QR Codes in your terminal. It doesn't 
 
 ---
 
-# R is for RipGrep<div class="text-sm text-primary-lighter">https://github.com/BurntSushi/ripgrep</div>
+# R is for RipGrep<span block text="sm primary-lighter">https://github.com/BurntSushi/ripgrep</span>
 
 Ripgrep _recursively_ searches directories for files and then for text matchin a regex pattern. Respects .gitignore, and has switches to search specific file types, and can do globbing.
 
@@ -452,7 +466,7 @@ TODO: Copy more examples from work.
 -->
 ---
 
-# S is for SOPS<div class="text-sm text-primary-lighter">https://github.com/getsops/sops</div>
+# S is for SOPS<span block text="sm primary-lighter">https://github.com/getsops/sops</span>
 
 SOPS is a tool for managing secrets in configuration files, encrypting with Age, PGP, Azure Key Vault, AWS KMS or GCP KMS.
 
@@ -472,16 +486,16 @@ sops ./secret.yaml
 
 ---
 
-# <div class="text-2xl">T is for Terraform (Tofu)</div><div text="sm primary-lighter">https://github.com/hashicorp/terraform</div><div class="text-sm text-primary-lighter">https://github.com/opentofu/opentofu</div>
+# <span class="text-2xl">T is for Terraform (Tofu)</span><span block text="sm primary-lighter">https://github.com/hashicorp/terraform</span><span block text="sm primary-lighter">https://github.com/opentofu/opentofu</span>
 
 The cross-cloud, cross-platform, infrastructure as code tool.
 <!-- Tofu is a fork of Terraform due to the license changes prior to Hashicorp's purchase by IBM. -->
 
-# <div class="text-2xl">Tailscale</div><div class="text-sm text-primary-lighter">https://github.com/tailscale/tailscale</div>
+# <span class="text-2xl">Tailscale</span><span block text="sm primary-lighter">https://github.com/tailscale/tailscale</span>
 
 The easiest way to use Wireguard. Connect and disconnect, serve content and local services, etc.
 
-# <div class="text-2xl">Tig</div><div class="text-sm text-primary-lighter">https://github.com/jonas/tig</div>
+# <span class="text-2xl">Tig</span><span block text="sm primary-lighter">https://github.com/jonas/tig</span>
 
 A text user interface that can be used to browse your git repo, stage and commit changes.
 
@@ -493,7 +507,7 @@ A text user interface that can be used to browse your git repo, stage and commit
 
 ---
 
-# V is for viu <br/><div class="text-sm text-primary-lighter">https://github.com/atanunq/viu</div>
+# V is for viu <span block text="sm primary-lighter">https://github.com/atanunq/viu</span>
 
 A fast image viewer for the terminal.
 
@@ -514,13 +528,17 @@ Get-ChildItem .\Icons\weather\ -Exclude *.txt
 
 ---
 
-# W is for WezTerm and Windows Terminal
+# W is for Wush <span block text="sm primary-lighter">https://github.com/coder/wush</span>
 
-# W is for Wush (a wireguard powered file-transfer tool)
+A wireguard powered file-transfer tool. Also available in your browser at [wush.dev](https://wush.dev)
 
-# W is for Winget
+```powershell
+wush serve
+wush cp 1gb.txt
+```
 
-# W is for Wsl
+## Honorable mention to WezTerm (and Windows Terminal)
+## And Winget, and Wsl...
 
 ---
 
@@ -540,7 +558,7 @@ git-xargs \
 
 ---
 
-# Y is for yq<div class="text-sm text-primary-lighter">https://github.com/mikefarah/yq</div>
+# Y is for yq<span block text="sm primary-lighter">https://github.com/mikefarah/yq</span>
 
 yq is a command-line structured data processor, like `jq` but with support for yaml, json, xml, properties, csv, tsv and toml. It doesn't support quite everything that jq does, but it's faster...
 
@@ -555,7 +573,7 @@ yq -i '.spec.template.spec.containers[0].image = "ghcr.io/stefanprodan/podinfo:6
 
 ---
 
-# Z is for zoxide<div class="text-sm text-primary-lighter">https://github.com/ajeetdsouza/zoxide</div>
+# Z is for zoxide<span block text="sm primary-lighter">https://github.com/ajeetdsouza/zoxide</span>
 
 A cross-platform, cross-shell, smarter `cd` command. It tracks your most used directories and lets you jump to them with a few keystrokes.
 
