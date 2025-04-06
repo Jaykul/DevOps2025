@@ -274,6 +274,8 @@ convert -size 50x80 xc: +noise Random -write mpr:noise +delete `
 
 The json query tool lets you slice and filter, map and transform structured data. You don't _need_ jq in PowerShell, but having it can save you time when people's examples use it, and if nothing else, it's a prettier way to display json.
 
+But honestly. I ran out of steam here. I prefer dasel and yq to jq...
+
 <!-- TODO: I need a better tool for J -- I don't believe in jq -->
 
 ### Examples
@@ -543,6 +545,16 @@ wush cp 1gb.txt
 ---
 
 # X is for xcopy (and RoboCopy, I guess)
+
+## But xq is more interesting <span block text="sm primary-lighter">https://github.com/sibprogrammer/xq</span>
+
+It's a little like jq, but for xml and with xpath or css selectors instead
+
+```PowerShell
+Get-Content unformatted.xml | xq
+Get-Content unformatted.xml | xq -x /user/@status
+Get-Content unformatted.xml | xq -q "body > p"
+```
 
 <!--
 TODO: Should this be xargs instead?

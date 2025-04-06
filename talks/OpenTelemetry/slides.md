@@ -443,7 +443,9 @@ equal: true
 
 There is an [OpenTelemetry Demo](https://opentelemetry.io/ecosystem/demo/) on [GitHub](https://github.com/open-telemetry/opentelemetry-demo) with great [docs](https://opentelemetry.io/docs/demo/), which you can run locally to see how OpenTelemetry works in practice.
 
-Right now, I'm running it on [otel.poshcode.com](https://otel.poshcode.com) and you can even access [grafana](https://otel.poshcode.com/grafana) and [Jaeger](https://otel.poshcode.com/jaeger/ui) to see the data. Please don't mess with the feature flags while I'm running the demo 🥹
+Right now, I'm running it on [otel.poshcode.com](https://otel.poshcode.com) and you can even access [grafana](https://otel.poshcode.com/grafana) and [Jaeger](https://otel.poshcode.com/jaeger/ui) to see the data.
+
+Please don't mess with the feature flags while I'm running the demo 🥹
 
 <!--
 
