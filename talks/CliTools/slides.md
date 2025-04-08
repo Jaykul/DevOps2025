@@ -249,13 +249,15 @@ So many possibilities for scripting images, from resizing & converting to comple
 magick ./public/images/RateThis.png RateThis.six && get-content RateThis.six
 # convert to sixel and output to pipeline
 magick ./public/images/RateThis.png sixel:-
+
+magick -background '#212021' -fill lightblue -font Jokerman -pointsize 62 -size 420x -gravity Center caption:'ImageMagick Roles, OK?' sixel:-
 ```
 
 <!--
 Another one you need to get from choco or winget
 
 1..5 | % {
-convert -size 50x80 xc: +noise Random -write mpr:noise +delete `
+magick -size 50x80 xc: +noise Random -write mpr:noise +delete `
         mpr:noise -extent 100x80 -compose copy `
         -page +50-40 mpr:noise -page +50+40 mpr:noise -flatten -write mpr:tile +delete `
         mpr:tile -virtual-pixel tile `
@@ -544,9 +546,7 @@ wush cp 1gb.txt
 
 ---
 
-# X is for xcopy (and RoboCopy, I guess)
-
-## But xq is more interesting <span block text="sm primary-lighter">https://github.com/sibprogrammer/xq</span>
+# X is xq <span block text="sm primary-lighter">https://github.com/sibprogrammer/xq</span>
 
 It's a little like jq, but for xml and with xpath or css selectors instead
 

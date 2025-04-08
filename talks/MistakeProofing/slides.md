@@ -295,7 +295,7 @@ if ($Force -or $PSCmdlet.ShouldProcess($Player.Name, "Move ${DistanceInMeters} m
 
 There are many ways to prevent mistakes in PowerShell.
 
-<p class="text-sm text-green italic">Remember: To run these as demos, pre-run demos-1.ps1</div>
+<p class="text-sm text-green italic">Remember: To run these as demos, pre-dotsource ./demos/poka-yoke.ps1</div>
 
 [click]Always use CmdletBinding. It's necessary to support the common parameters that users expect, and it's the easiest way to make sure users can **only** pass the parameters you expect.
 
@@ -478,7 +478,7 @@ These might be some things we've discussed already, it might be new ScriptAnalyz
 
 ---
 
-# Design By Writing ... Help <div class="inline-icon-btn">F1</div>
+# Design By Writing ... Help <span class="inline-icon-btn">F1</span>
 
 ## _Plan:_ Write .EXAMPLEs for Common Scenarios {v-click}
 
@@ -486,7 +486,7 @@ These might be some things we've discussed already, it might be new ScriptAnalyz
 
 ## _Check:_ Test Your Examples {v-click}
 
-<h2><em>Act:</em> <span v-click>Document Your Interface <div class="inline-icon-btn">ALT</div> + <div class="inline-icon-btn">H</div></span></h2>
+<h2><em>Act:</em> <span v-click>Document Your Interface <span class="inline-icon-btn">ALT</span> + <span class="inline-icon-btn">H</span></span></h2>
 
 <!--
 
@@ -530,7 +530,7 @@ That's it.
 
 ## Error Handling & Logging { v-click }
 
-<v-click>
+<v-click at="3">
 
 ```powershell {8-9|11,12-13}
 function Move-Player {
@@ -555,10 +555,6 @@ function Move-Player {
 </v-click>
 
 <!--
-
-We've talked about the relationship between the scientific method and the continuous-improvement cycle.
-It also ties in to the pattern I suggested for writing regression tests.
-
 The last thing that I really want to talk about is how do we detect mistakes?
 For continuous improvement, we want to detect all mistakes, and capture as much information as possible.
 
@@ -574,6 +570,6 @@ When we know how to handle the error, we tell the user what to do.
 [click]If we don't know how to handle it, we log it,
 or at least we ask the user to include the information in an error report.
 
-<p class="text-sm text-green italic">DEMO: dot-source talks\MistakeProofing\demos-1.ps1</p>
+<p class="text-sm text-green italic">DEMO: dot-source demos/poka-yoke.ps1</p>
 
 -->

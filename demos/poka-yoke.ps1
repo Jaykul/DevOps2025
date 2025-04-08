@@ -123,7 +123,7 @@ New-Module "DetectingMistakes" {
                 })]
             [ValidateScript({
                     if ($CardinalDirection -eq "North" -and $Player.Position.Y - $_ -lt 0) {
-                        throw "You can't move that far North. The edge is only $($Position.Y) away."
+                        throw "You can't move that far North. The edge is only $($Player.Position.Y) away."
                     }
                     $true
                 })]
