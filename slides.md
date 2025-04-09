@@ -9,7 +9,7 @@ highlighter: shiki
 lineNumbers: false
 fonts:
   # basically the text
-  sans: Chakra Petch # Offside
+  sans: Offside  # Chakra Petch
   # use with `font-serif` css class from UnoCSS
   serif: Milonga
   quote: Carattere
@@ -20,15 +20,15 @@ defaults:
   leftFooter: /images/cc-by-sa.svg
   rightHeader: /images/PSDOGSummit.png
   layout: default
-src: ./talks/MistakeProofing/cover.md
+  background: images/323677.jpg
+src: ./talks/CliTools/cover.md
 layout: cover
-background: images/322798.jpg
 level: 1
 ---
 <!-- The content should come from cover.md -->
 ---
 layout: image
-image: images/Sponsors.png
+image: /images/Sponsors.png
 rightHeader:
 leftFooter:
 routeAlias: Sponsors
@@ -70,7 +70,9 @@ I'm Joel Bennett, and I'm from western New York by way of the grasslands of Guan
 -->
 
 ---
-src: ./talks/MistakeProofing/slides.md
+src: ./talks/CliTools/slides.md
+
+---
 ---
 layout: image-right
 image: /images/RateThis.png
@@ -88,3 +90,5 @@ Feedback is a gift. Please review this session!
 </div>
 
 <!-- TODO: Make a layout where this image and the header/foooter images can all show up -->
+
+---

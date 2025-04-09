@@ -14,7 +14,7 @@ keywords: ContinuousImprovement,DevOps,PowerShell,PokaYoke,ErrorPrevention,Mista
     Mistake-Proofing your PowerShell <br/>
     scripts and functions
 </div>
-<div>
+<div class="border-blend">
     Joel Bennett
 </div>
 <div class="bg-blend">
@@ -28,9 +28,9 @@ keywords: ContinuousImprovement,DevOps,PowerShell,PokaYoke,ErrorPrevention,Mista
     PowerShell + DevOps<br/>
     <span class="text-blend">Global Summit</span>
 </div>
-
+<!--
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
     Press Space for next page <carbon:arrow-right class="inline"/>
   </span>
-</div>
+</div> -->

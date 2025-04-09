@@ -8,12 +8,13 @@ keywords: OpenStandards,Observability,OpenTelemetry,Tracing,Metrics,Logging,Prof
 ---
 
 <span class="text-8xl text-white" style="font-weight:700;" >
-    Open <span class="text-blend">Telemetry</span> <!-- <logos-git-icon /> --> <!--light-icon icon="git-pull-request"/-->
+    <span class="text-blend">Open Telemetry</span> <!-- <logos-git-icon /> --> <!--light-icon icon="git-pull-request"/-->
 </span>
 <div mb="2rem" text="4xl primary-lighter align-center" style="font-weight:500;" >
     The Rise of Open Standards in Observability
 </div>
-<div>
+
+<div class="border-blend">
     Joel Bennett
 </div>
 <div class="bg-blend">
@@ -27,9 +28,9 @@ keywords: OpenStandards,Observability,OpenTelemetry,Tracing,Metrics,Logging,Prof
     PowerShell + DevOps<br/>
     <span class="text-blend">Global Summit</span>
 </div>
-
+<!--
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
     Press Space for next page <carbon:arrow-right class="inline"/>
   </span>
-</div>
+</div> -->

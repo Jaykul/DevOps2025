@@ -13,7 +13,8 @@ keywords: CLI,Tools,DevOps,Utilities,QuickTake
 <div class="text-5xl text-primary-lighter mb-2rem" style="font-weight:500;" >
     Tools for DevOps
 </div>
-<div>
+
+<div class="border-blend">
     Joel Bennett
 </div>
 <div class="bg-blend">

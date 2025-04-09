@@ -1,24 +1,16 @@
----
-layout: section
----
-# What is Observability?
+# Roadmap:
 
-<br/>
-<br/>
-
-<v-clicks>
-
-## The ability to measure and understand the internal state of a system based on the data it generates
-
-## The more _observable_ a system is, the easier it is to troubleshoot novel problems and get to the root cause
-
-</v-clicks>
+1. What is Observability?
+2. What did we do before?
+3. Seriously: What is Observability?
+6. Demo: Does it work?
+4. Why does it need standards?
+5. What are the standards?
+6. Wait, there are tools too?
+7. Demo: Show us some code!
 
 <!--
-
-Observability is the ability to measure and understand the internal state of a complex system (from the outside), based solely on data that it generates -- without having to rely on internal knowledge or assumptions about how the system works.
-
-The more _observable_ a system is, the easier it is to troubleshoot novel problems (that is, the "unknown unknowns") and get to the root cause.
+ I just want to give us a sort-of roadmap to help explain why I'm meandering...
 
 -->
 
@@ -149,6 +141,31 @@ That merger was a pivotal moment for observability. The commercial and open sour
 
 -->
 
+
+---
+layout: section
+---
+# What is Observability?
+
+<br/>
+<br/>
+
+<v-clicks>
+
+## The ability to measure and understand the internal state of a system based on the data it generates
+
+## The more _observable_ a system is, the easier it is to troubleshoot novel problems and get to the root cause
+
+</v-clicks>
+
+<!--
+
+[click]Observability is the ability to measure and understand the internal state of a complex system (from the outside), based solely on data that it generates -- without having to rely on internal knowledge or assumptions about how the system works.
+
+[click]The more _observable_ a system is, the easier it is to troubleshoot novel problems (those "unknown unknowns", the unexpected problems you've never seen before) and get to the root cause.
+
+-->
+
 ---
 layout: two-cols
 rightClass: col-span-4
@@ -159,6 +176,8 @@ leftClass: col-span-8
 # Telemetry Signals
 
 ::left::
+
+Data a system generates _in order_ for us to be able to understand what is happening inside.
 
 In general, we describe telemetry as a set of system outputs called _**signals**_, which require a mechanism for context discovery and propagation.
 
@@ -205,6 +224,68 @@ They are designed to work together --  so that you can correlate logs, metrics, 
 -->
 
 ---
+
+# The USE Method
+
+Popularized by [Brendan Greg](https://www.brendangregg.com/usemethod.html) ([shouting guy](https://www.youtube.com/watch?v=tDacjrSCeq4)), An Intel Fellow, and internationally renowned expert in computing performance. While at Netflix, pioneered the use of eBPF as an observability technology.
+
+- <span bold underline italic>U</span>tilization (% time that the resource was busy)
+- <span bold underline italic>S</span>aturation (amount of work resource has to do, e.g. queue length)
+- <span bold underline italic>E</span>rrors (count of error events)
+
+<!--
+
+Depending on your background, you may have heard of the "USE" method for monitoring.
+
+Brendan calls it a methodology for analyzing the performance of a system.
+
+It directs the construction of a checklist, which s frequently used for _server analysis_ to identify resource bottlenecks or errors. You basically go through each resource (like, CPU, Memory, Disk, Network) and check those three metrics until you find the problem...
+
+-->
+
+---
+
+# The RED Method
+
+Popularized by [Tom Wilkie], VP at Grafana, co-founder of Kausal, [while he was at Weaveworks](https://web.archive.org/web/20240118175556/https://www.weave.works/blog/the-red-method-key-metrics-for-microservices-architecture/)...
+
+- <span bold underline italic>R</span>ate (the number of requests per second)
+- <span bold underline italic>E</span>rrors (the number of those requests that are failing)
+- <span bold underline italic>D</span>uration (the amount of time those requests take)
+
+<!--
+
+ Tom Wilkie suggests that the RED method is easier to query, and better represents how your users are likely to feel (if there are a lot of errors, or high latency, they're likely frustrated).
+
+-->
+
+---
+
+# Four Golden Signals (LETS?)
+
+Popularized by the Google [SRE Book](https://sre.google/sre-book/monitoring-distributed-systems/#xref_monitoring_golden-signals)
+
+
+- <span bold underline italic>L</span>atency (time taken to serve a request)
+- <span bold underline italic>E</span>rrors (rate of requests that are failing)
+- <span bold underline italic>T</span>raffic (how much demand is placed on your system)
+- <span bold underline italic>S</span>aturation (how "full" your service is)
+
+
+<!--
+
+I'm not going to pick a side in the USE vs RED. Instead, I _would_ just like to point out that Google has _four_ "golden signals" that they talk about in the SRE Book, which basically cover all the things that both of those methods measures.
+
+Before we go any further, let's see if it's worth it, ok?
+
+-->
+---
+layout: center
+---
+
+# Demo Time
+
+---
 layout: two-cols
 ---
 
@@ -244,13 +325,13 @@ Each signal works as a cross-cutting concern, involving each part of the system.
 
 <!--
 
-Although each signal can be used independently, they are cross-cutting concerns, which require implementation throughout the stack, in each langauge and framework, in each application, in agents and servers that collect the data, and clients which may dsplay it.
+Although any signal can be used independently, they are cross-cutting concerns, which require implementation throughout the stack, in each language and framework, in each application, in agents and servers that collect the data, and maybe clients which may display it.
 
 Ultimately, this is the reason why we needed standards.
 
 Without a standard, every language and framework had it's own way of implementing logging and metrics, and they all had to implement exporters and APIs for multiple vendors. Any new APM vendor that wanted to enter the market had to write their own tooling, their own SDKs, their own APIs, for each and every programming language and operating system they wanted to market to.
 
-I interviewd for a job at DataDog years ago, when they were just planning their .NET support -- they needed to hire .NET developers who were also reverse engineers. They were looking for deep experts, people who could read IL and write low-level API intercepts, who had familiarity not just with writing .NET code, but with the source code of the framework. And they had to do that -- hiring a whole team of people with specific language and framework skills -- for _each_ language they wanted to support.
+I interviewed for a job at DataDog years ago, when they were just planning their .NET support -- they needed to hire .NET developers who were also reverse engineers. They were looking for deep experts, people who could read IL and write low-level API intercepts, who had familiarity not just with writing .NET code, but with the source code of the framework. And they had to do that -- hiring a whole team of people with specific language and framework skills -- for _each_ language they wanted to support.
 
 Open standards and open specifications are integral drivers of compatibility and collaboration. And yes, they make it easier for new vendors to enter the market, but they also make it possible for the big vendors to bring on-board every new language and framework, and to offload instrumentation to the framework and language authors...
 
