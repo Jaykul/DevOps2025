@@ -21,7 +21,7 @@ defaults:
   rightHeader: /images/PSDOGSummit.png
   layout: default
   background: images/323677.jpg
-src: ./talks/CliTools/cover.md
+src: ./talks/OpenTelemetry/cover.md
 layout: cover
 level: 1
 ---
@@ -70,7 +70,7 @@ I'm Joel Bennett, and I'm from western New York by way of the grasslands of Guan
 -->
 
 ---
-src: ./talks/CliTools/slides.md
+src: ./talks/OpenTelemetry/slides.md
 
 ---
 ---

@@ -25,7 +25,7 @@ age-keygen -o key.txt
 Public key: age1ql3z7hjy54pw3hyww5ayyfg7zqgvc7w3j2elw8zmrj2kg5sfn9aqmcac8p
 
 tar cvz "~/data" | age -r "age1ql3z7hjy54pw3hyww5ayyfg7zqgvc7w3j2elw8zmrj2kg5sfn9aqmcac8p" > data.tar.gz.age
-age --decrypt --identity "key.txt" --output "data.tar.gz" data.tar.gz.age
+age --decrypt --identity "key.txt" --output "data.tgz" data.tgz.age
 ```
 
 <!--
@@ -250,7 +250,7 @@ magick ./public/images/RateThis.png RateThis.six && get-content RateThis.six
 # convert to sixel and output to pipeline
 magick ./public/images/RateThis.png sixel:-
 
-magick -background '#212021' -fill lightblue -font Jokerman -pointsize 62 -size 420x -gravity Center caption:'ImageMagick Roles, OK?' sixel:-
+magick -background '#212021' -fill lightblue -font Jokerman -pointsize 62 -size 600x -gravity Center caption:'I Is for ImageMagik' sixel:-
 ```
 
 <!--
@@ -272,22 +272,23 @@ magick -size 50x80 xc: +noise Random -write mpr:noise +delete `
 
 ---
 
-# J is for jq<span block text="sm primary-lighter">https://github.com/jqlang/jq</span>
+# J is for jnv<span block text="sm primary-lighter">https://github.com/ynqa/jnv</span>
 
-The json query tool lets you slice and filter, map and transform structured data. You don't _need_ jq in PowerShell, but having it can save you time when people's examples use it, and if nothing else, it's a prettier way to display json.
-
-But honestly. I ran out of steam here. I prefer dasel and yq to jq...
+The interactive filter editor for jq, still lets you slice and filter, map and transform structured data. You don't _need_ jq in PowerShell, but having it can save you time when people's examples use it, and if nothing else, it's a prettier way to display json.
 
 <!-- TODO: I need a better tool for J -- I don't believe in jq -->
 
 ### Examples
 
 ```powershell
-irm 'https://api.github.com/repos/powershell/powershell/commits?per_page=5'
-| ft @{n="name"; expr={$_.commit.author.name}}, @{n="message"; expr = { $_.commit.message }}
+kubectl get pod opensearch-0 -ojson | jnv
 
 curl 'https://api.github.com/repos/powershell/powershell/commits?per_page=5'
-| jq '.[] | {message: .commit.message, name: .commit.author.login}'
+| jq '.[] | {message: .commit.message, name: .commit.author.name}'
+
+curl 'https://api.github.com/repos/powershell/powershell/commits?per_page=5'
+| jnv
+.[].commit.author
 ```
 
 ---
@@ -361,9 +362,15 @@ helm list -A | ConvertFrom-Csv -Delimiter `t | ft NAME*, REVISION*, UPDATED*, *V
 
 ---
 
-# N is for nmap<span block text="sm primary-lighter">https://nmap.org/</span>
+# N is for nvm<span block text="sm primary-lighter">https://nmap.org/</span>
 
-<!-- TODO: I don't really even know how to use nmap -->
+
+Node Version Manager. Using node to support lots of developer teams without NVM is ... difficult
+
+```powershell
+nvm list
+nvm use newest
+```
 
 ---
 
@@ -439,7 +446,7 @@ QRC is a helpful little command-line tool for generating QR codes _inside_ your 
 ### Examples
 
 ```powershell
-  qrc "https://HuddledMasses.org"
+  qrc "https://survey.sogolytics.com/survey/form?k=RQsQSQTQTsRUsPsPsP&lang=0"
   qrc "MAILTO:Jaykul@HuddledMasses.org"
   qrc "WIFI:S:guestwifi;T:WPA;P:we are not allowed to share that;;"
 ```
@@ -459,14 +466,14 @@ Ripgrep _recursively_ searches directories for files and then for text matchin a
 ### Examples
 
 ```powershell
-rg --tyaml "dev" --iglob "**/*prod/*"
-
+rg -tps "Write-Host"
+rg -tyaml "dev" --iglob "**/*prod/*"
 ```
 
 <!--
 RipGrep is fast, and is the go-to tool for searching text when it hasn't ben indexed.
 
-TODO: Copy more examples from work.
+You can trivially search all ps1 files for "Write-Host" or use globbing to search all the yaml in prod for "dev"
 -->
 ---
 
@@ -489,8 +496,11 @@ sops ./secret.yaml
 ```
 
 ---
+# <span class="text-2xl">T is for Tig</span><span block text="sm primary-lighter">https://github.com/jonas/tig</span>
 
-# <span class="text-2xl">T is for Terraform (Tofu)</span><span block text="sm primary-lighter">https://github.com/hashicorp/terraform</span><span block text="sm primary-lighter">https://github.com/opentofu/opentofu</span>
+A text user interface that can be used to browse your git repo, stage and commit changes.
+
+# <span class="text-2xl">Terraform (Tofu)</span><span block text="sm primary-lighter">https://github.com/hashicorp/terraform</span><span block text="sm primary-lighter">https://github.com/opentofu/opentofu</span>
 
 The cross-cloud, cross-platform, infrastructure as code tool.
 <!-- Tofu is a fork of Terraform due to the license changes prior to Hashicorp's purchase by IBM. -->
@@ -499,15 +509,26 @@ The cross-cloud, cross-platform, infrastructure as code tool.
 
 The easiest way to use Wireguard. Connect and disconnect, serve content and local services, etc.
 
-# <span class="text-2xl">Tig</span><span block text="sm primary-lighter">https://github.com/jonas/tig</span>
-
-A text user interface that can be used to browse your git repo, stage and commit changes.
-
 ---
 
 # U is for Ubuntu
 
-<!-- TODO: I need a tool here -->
+WSL on your Windows box means you can run commands in WSL using the name of the distro
+
+```powershell
+ubuntu run top
+```
+
+<
+
+<!--
+
+Remember you can make your own "distros" for WSL to pre-configure whatever you need.
+
+Then you can "run" any linux command...
+NOTE:
+
+-->
 
 ---
 
@@ -550,7 +571,7 @@ wush cp 1gb.txt
 
 It's a little like jq, but for xml and with xpath or css selectors instead
 
-```PowerShell
+```powershell
 Get-Content unformatted.xml | xq
 Get-Content unformatted.xml | xq -x /user/@status
 Get-Content unformatted.xml | xq -q "body > p"
